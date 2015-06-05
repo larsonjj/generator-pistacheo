@@ -1,30 +1,21 @@
 {
-  "name": "generator-yeogurt",
+  "name": "generator-pistacheo",
   "version": "1.0.0",
-  "description": "A “Choose your own adventure” generator for creating static sites and single page applications. Helps you harness the power of your favorite tools: Angular, React + Flux, Backbone, Jade, Swig, Express, Grunt and much more!",
+  "description": "Yeoman generator for creating Express Applications and APIs",
   "keywords": [
     "yeoman-generator",
-    "yeogurt",
-    "frontend",
-    "html5",
-    "modernizr",
+    "pistacheo",
     "jade",
     "swig",
     "sass",
     "less",
+    "stylus",
     "browserify",
-    "dashboard",
-    "backbone",
-    "react",
-    "angular",
-    "jsx",
-    "reflux",
     "express",
-    "api",
-    "underscore"
+    "api"
   ],
-  "homepage": "https://github.com/larsonjj/generator-yeogurt",
-  "bugs": "https://github.com/larsonjj/generator-yeogurt/issues",
+  "homepage": "https://github.com/larsonjj/generator-pistacheo",
+  "bugs": "https://github.com/larsonjj/generator-pistacheo/issues",
   "author": {
     "name": "Jake Larson",
     "email": "jake.j.larson@gmail.com",
@@ -33,7 +24,7 @@
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/larsonjj/generator-yeogurt.git"
+    "url": "git@github.com:larsonjj/generator-pistacheo.git"
   },
   "scripts": {
     "clean": "rimraf node_modules coverage test/app/temp test/subgenerators/temp",

@@ -43,11 +43,11 @@ var errors = function errors(errorCode, templatePath) {
   // 500 errors
   var serverError = function serverError(err, req, res) {
     var message = err.message;
-    var status = err.status || 500;
+    var errStatus = err.status || 500;
 
     sendError({
       message: message,
-      status: status,
+      status: errStatus,
       viewPath: viewPath
     }, res);
   };
