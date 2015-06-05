@@ -1,0 +1,8 @@
+node_modules
+*.log
+build
+tmp
+.grunt
+server/config/secrets.js
+.DS_Store
+.yo-rc.json
