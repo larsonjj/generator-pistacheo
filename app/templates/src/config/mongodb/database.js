@@ -12,7 +12,7 @@ var databaseConfig = function(app) {
   // Connect to database
   mongoose.connect(settings.database.url, settings.database.options);
 
-  if ('development' === env) {
+  if (env === 'development') {
     // Log database actions
     mongoose.set('debug', true);
   }
