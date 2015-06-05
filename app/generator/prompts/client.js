@@ -13,31 +13,7 @@ var clientPrompts = function clientPrompts() {
 
   this.log('\n---- ' + 'Client'.red.underline + ' ----\n');
 
-  this.prompt([{
-    type: 'confirm',
-    name: 'singlePageApplication',
-    message: 'Will this be a ' + 'Single Page Application'.blue + '?',
-    default: true
-  }, {
-    when: function(answers) {
-      return !answers.singlePageApplication;
-    },
-    type: 'list',
-    name: 'htmlOption',
-    message: 'Which ' + 'HTML preprocessor'.blue + ' would you like to use?',
-    choices: ['Jade', 'Swig'],
-    filter: function(val) {
-      var filterMap = {
-        'Jade': 'jade',
-        'Swig': 'swig'
-      };
-
-      return filterMap[val];
-    }
-  }, {
-    when: function(answers) {
-      return answers.jsFramework !== 'react';
-    },
+  this.prompt([ {
     type: 'list',
     name: 'jsOption',
     message: 'Which ' + 'JavaScript module library'.blue + ' would you like to use?',

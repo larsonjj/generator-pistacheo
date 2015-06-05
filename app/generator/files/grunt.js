@@ -36,47 +36,15 @@ var taskFiles = function taskFiles() {
     this.template('grunt/config/compile/stylus.js', 'grunt/config/compile/stylus.js');
   }
 
-  if (this.htmlOption === 'jade') {
-    this.template('grunt/config/compile/jade.js', 'grunt/config/compile/jade.js');
-  }
-  else if (this.htmlOption === 'swig') {
-    this.template('grunt/config/compile/swig.js', 'grunt/config/compile/swig.js');
-  }
-
   // Browserify
   if (this.jsOption === 'browserify') {
     this.template('grunt/config/compile/browserify.js', 'grunt/config/compile/browserify.js');
-  }
-
-  if (this.jsFramework === 'angular') {
-    this.template('grunt/config/compile/ng-templates.js', 'grunt/config/compile/ng-templates.js');
-    this.template('grunt/config/compile/ng-annotate.js', 'grunt/config/compile/ng-annotate.js');
-  }
-
-  // ========
-  // Docs
-  // ========
-
-  // JSDoc
-  if (this.useJsdoc) {
-    this.template('grunt/config/docs/jsdoc.js', 'grunt/config/docs/jsdoc.js');
-  }
-
-  // Auto-Dashboard
-  if (this.useDashboard) {
-    this.template('grunt/config/docs/dashboard.js', 'grunt/config/docs/dashboard.js');
-  }
-
-  // KSS Styleguide
-  if (this.useKss) {
-    this.template('grunt/config/docs/styleguide.js', 'grunt/config/docs/styleguide.js');
   }
 
   // ========
   // Optimize
   // ========
 
-  this.template('grunt/config/optimize/htmlmin.js', 'grunt/config/optimize/htmlmin.js');
   this.template('grunt/config/optimize/postcss.js', 'grunt/config/optimize/postcss.js');
   this.template('grunt/config/optimize/imagemin.js', 'grunt/config/optimize/imagemin.js');
 
@@ -84,15 +52,8 @@ var taskFiles = function taskFiles() {
   // Server
   // ========
 
-  if (!this.useServer) {
-    // Connect (simple webserver)
-    this.template('grunt/config/server/browsersync.js', 'grunt/config/server/browsersync.js');
-  }
-
-  if (this.useServer) {
-    this.template('grunt/config/server/express.js', 'grunt/config/server/express.js');
-    this.template('grunt/config/server/env.js', 'grunt/config/server/env.js');
-  }
+  this.template('grunt/config/server/express.js', 'grunt/config/server/express.js');
+  this.template('grunt/config/server/env.js', 'grunt/config/server/env.js');
 
   // ========
   // Test

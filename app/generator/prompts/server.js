@@ -14,14 +14,6 @@ var serverPrompts = function serverPrompts() {
   this.log('\n---- ' + 'Server'.red.underline + ' ----\n');
 
   this.prompt([{
-    type: 'confirm',
-    name: 'useServer',
-    message: 'Would you like to use a ' + 'Node + Express Server'.blue + '?',
-    default: true
-  }, {
-    when: function(answers) {
-      return answers.useServer;
-    },
     type: 'list',
     name: 'dbOption',
     message: 'What ' + 'database type'.blue + ' would you like to use ?',
@@ -38,7 +30,7 @@ var serverPrompts = function serverPrompts() {
     }
   }, {
     when: function(answers) {
-      return answers.dbOption !== 'none' && answers.useServer;
+      return answers.dbOption !== 'none';
     },
     name: 'dbHost',
     message: 'What is your ' + 'database host/url'.blue + '?',
@@ -66,14 +58,14 @@ var serverPrompts = function serverPrompts() {
     default: '27017'
   }, {
     when: function(answers) {
-      return answers.dbOption !== 'none' && answers.useServer;
+      return answers.dbOption !== 'none';
     },
     name: 'dbName',
     message: 'What is the ' + 'name'.blue + ' of your database?',
     default: 'yeogurt_db'
   }, {
     when: function(answers) {
-      return answers.dbOption !== 'none' && answers.useServer;
+      return answers.dbOption !== 'none';
     },
     name: 'dbUser',
     message: 'What is your ' + 'username'.blue + ' for this database?',
@@ -87,7 +79,7 @@ var serverPrompts = function serverPrompts() {
     }
   }, {
     when: function(answers) {
-      return answers.dbOption !== 'none' && answers.useServer;
+      return answers.dbOption !== 'none';
     },
     name: 'dbPass',
     message: 'What is your ' + 'password'.blue + ' for this database?',

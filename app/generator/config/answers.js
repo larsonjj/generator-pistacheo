@@ -45,8 +45,12 @@ var answersConfig = function answersConfig() {
   }
 
   // Clear dbPass and/or dbUser if 'nouser' and/or 'nopass'
-  if (this.answers.dbUser === 'nouser') {this.answers.dbUser = '';}
-  if (this.answers.dbPass === 'nopass') {this.answers.dbPass = '';}
+  if (this.answers.dbUser === 'nouser') {
+    this.answers.dbUser = '';
+  }
+  if (this.answers.dbPass === 'nopass') {
+    this.answers.dbPass = '';
+  }
 
   this.dbUser = this.answers.dbUser;
   this.dbPass = this.answers.dbPass;
@@ -54,9 +58,9 @@ var answersConfig = function answersConfig() {
   // Setup Database URLs
   var username = this.dbUser || '';
   var password = this.dbPass ? ':' + this.dbPass : '';
-  var port   = this.answers.dbPort;
-  var host   = this.dbUser ? '@' + this.answers.dbHost : this.answers.dbHost;
-  var name   = this.answers.dbName ? this.answers.dbName : '';
+  var port = this.answers.dbPort;
+  var host = this.dbUser ? '@' + this.answers.dbHost : this.answers.dbHost;
+  var name = this.answers.dbName ? this.answers.dbName : '';
 
   if (this.dbOption === 'mongodb') {
     this.dbURL = process.env.MONGODB || 'mongodb://' +
@@ -88,31 +92,30 @@ var answersConfig = function answersConfig() {
 
   // Client
   this.singlePageApplication = this.answers.singlePageApplication;
-  this.htmlOption            = this.answers.htmlOption;
-  this.jsFramework           = this.answers.jsFramework;
-  this.useJsx                = this.answers.useJsx;
-  this.jsOption              = this.answers.jsOption;
-  this.cssOption             = this.answers.cssOption;
-  this.sassSyntax            = this.answers.sassSyntax;
-  this.extras                = this.answers.extras;
+  this.htmlOption = this.answers.htmlOption;
+  this.useJsx = this.answers.useJsx;
+  this.jsOption = this.answers.jsOption;
+  this.cssOption = this.answers.cssOption;
+  this.sassSyntax = this.answers.sassSyntax;
+  this.extras = this.answers.extras;
 
   // Default to mocha for testing (cannot use jasmine server-side)
   this.answers.testFramework = this.answers.testFramework || 'mocha';
 
   // Testing
   this.testFramework = this.answers.testFramework;
-  this.useTesting    = this.answers.useTesting;
-  this.useServerTesting    = this.answers.useServerTesting;
-  this.useE2e        = this.answers.useE2e;
+  this.useTesting = this.answers.useTesting;
+  this.useServerTesting = this.answers.useServerTesting;
+  this.useE2e = this.answers.useE2e;
 
   // Documentation
-  this.useJsdoc      = this.answers.useJsdoc;
-  this.useKss        = this.answers.useKss;
-  this.useDashboard  = this.answers.useDashboard;
+  this.useJsdoc = this.answers.useJsdoc;
+  this.useKss = this.answers.useKss;
+  this.useDashboard = this.answers.useDashboard;
 
   // Default Overwrites
   if (this.jsFramework === 'react') {
-    this.jsOption   = this.answers.jsOption   = 'browserify';
+    this.jsOption = this.answers.jsOption = 'browserify';
   }
 
   // Default jsOption to Browserify
