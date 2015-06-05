@@ -36,23 +36,6 @@ var clientPrompts = function clientPrompts() {
     }
   }, {
     when: function(answers) {
-      return answers.singlePageApplication;
-    },
-    type: 'list',
-    name: 'jsFramework',
-    message: 'Which ' + 'JavaScript framework/library'.blue + ' would you like to use?',
-    choices: ['React + Reflux + React Router', 'Backbone + Marionette', 'Angular'],
-    filter: function(val) {
-      var filterMap = {
-        'React + Reflux + React Router': 'react',
-        'Backbone + Marionette': 'marionette',
-        'Angular': 'angular'
-      };
-
-      return filterMap[val];
-    }
-  }, {
-    when: function(answers) {
       return answers.jsFramework !== 'react';
     },
     type: 'list',

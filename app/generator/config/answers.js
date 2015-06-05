@@ -27,7 +27,7 @@ var answersConfig = function answersConfig() {
   // Assign each answer property to `this` context to give the generator access to it
 
   // Project Info
-  this.projectName  = this.answers.projectName;
+  this.projectName = this.answers.projectName;
   this.versionControl = this.answers.versionControl;
 
   // Server Info
