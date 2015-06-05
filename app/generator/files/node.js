@@ -26,9 +26,9 @@ var nodeFiles = function nodeFiles() {
     this.template('server/routes.js', 'server/routes.js');
 
     this.template('server/server.js', 'server/server.js');
-    this.template('server/index/index.js', 'server/index/index.js');
-    this.template('server/index/index.controller.js', 'server/index/index.controller.js');
-    this.template('server/index/package.json', 'server/index/package.json');
+    this.template('server/home/home.js', 'server/home/home.js');
+    this.template('server/home/home.controller.js', 'server/home/home.controller.js');
+    this.template('server/home/package.json', 'server/home/package.json');
   }
 };
 
