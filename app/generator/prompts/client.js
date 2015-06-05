@@ -13,7 +13,20 @@ var clientPrompts = function clientPrompts() {
 
   this.log('\n---- ' + 'Client'.red.underline + ' ----\n');
 
-  this.prompt([ {
+  this.prompt([{
+    type: 'list',
+    name: 'htmlOption',
+    message: 'Which ' + 'Server template library'.blue + ' would you like to use?',
+    choices: ['Jade', 'Swig'],
+    filter: function(val) {
+      var filterMap = {
+        'Jade': 'jade',
+        'Swig': 'swig'
+      };
+
+      return filterMap[val];
+    }
+  }, {
     type: 'list',
     name: 'jsOption',
     message: 'Which ' + 'JavaScript module library'.blue + ' would you like to use?',

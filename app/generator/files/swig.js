@@ -9,10 +9,6 @@ var swigFiles = function swigFiles() {
     this.template('src/static/swig/_layouts/base.swig', 'src/_layouts/base.swig');
     this.template('src/static/swig/_scripts/main.js', 'src/_scripts/main.js');
     this.template('src/static/swig/index.swig', 'src/index.swig');
-
-    if (this.useDashboard) {
-      this.template('src/static/swig/__dash__/index.dash.json', 'src/__dash__/index.dash.json');
-    }
   }
 };
 

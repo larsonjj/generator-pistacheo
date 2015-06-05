@@ -18,9 +18,7 @@ var answersConfig = function answersConfig() {
       this.projectPrompts,
       this.serverPrompts,
       this.clientPrompts,
-      this.documentationPrompts,
-      this.testingPrompts,
-      this.deploymentPrompts
+      this.testingPrompts
     );
   }
 
@@ -91,9 +89,6 @@ var answersConfig = function answersConfig() {
   }
 
   // Client
-  this.singlePageApplication = this.answers.singlePageApplication;
-  this.htmlOption = this.answers.htmlOption;
-  this.useJsx = this.answers.useJsx;
   this.jsOption = this.answers.jsOption;
   this.cssOption = this.answers.cssOption;
   this.sassSyntax = this.answers.sassSyntax;
@@ -107,16 +102,6 @@ var answersConfig = function answersConfig() {
   this.useTesting = this.answers.useTesting;
   this.useServerTesting = this.answers.useServerTesting;
   this.useE2e = this.answers.useE2e;
-
-  // Documentation
-  this.useJsdoc = this.answers.useJsdoc;
-  this.useKss = this.answers.useKss;
-  this.useDashboard = this.answers.useDashboard;
-
-  // Default Overwrites
-  if (this.jsFramework === 'react') {
-    this.jsOption = this.answers.jsOption = 'browserify';
-  }
 
   // Default jsOption to Browserify
   this.jsOption = this.answers.jsOption || 'browserify';
