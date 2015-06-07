@@ -29,7 +29,6 @@ var answersConfig = function answersConfig() {
   this.versionControl = this.answers.versionControl;
 
   // Server Info
-  this.useServer = this.answers.useServer;
 
   this.dbType = this.answers.dbType || this.answers.dbOption;
 

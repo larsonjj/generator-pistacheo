@@ -17,13 +17,9 @@ module.exports = function(grunt) {
   // Load all grunt tasks with JIT (Makes task loading super fast!)
   require('jit-grunt')(grunt, {
     // translate browsersync task to use the 'grunt-browser-sync' plugin
-    browserSync: 'grunt-browser-sync'<% if (htmlOption === 'swig') { %>,
-    // translate swig task to use the 'grunt-swig-templates' plugin
-    swig: 'grunt-swig-templates'<% } %><% if (useServer) { %>,
+    browserSync: 'grunt-browser-sync'<% if (useServer) { %>,
     // translate express task to use the 'grunt-express-server' plugin
-    express: 'grunt-express-server'<% } %><% if (jsFramework === 'angular') { %>,
-    // translate ngtemplates task to use the 'grunt-angular-templates' plugin
-    ngtemplates: 'grunt-angular-templates'<% } %><% if (useE2e) { %>,
+    express: 'grunt-express-server'<% } %><% if (useE2e) { %>,
     // translate protractor task to use the 'protractor-runner' plugin
     protractor: 'grunt-protractor-runner'<% } %>
   });
@@ -55,8 +51,7 @@ module.exports = function(grunt) {
 
   // Load task functions
   var utilConfig = loadTasks('./grunt/config/util');
-  var compileConfig = loadTasks('./grunt/config/compile');<% if (useDashboard) { %>
-  var docConfig = loadTasks('./grunt/config/docs');<% } %>
+  var compileConfig = loadTasks('./grunt/config/compile');
   var optimizeConfig = loadTasks('./grunt/config/optimize');
   var serverConfig = loadTasks('./grunt/config/server');
   var testConfig = loadTasks('./grunt/config/test');

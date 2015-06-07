@@ -2,7 +2,7 @@
 
 // Site information
 var title = '<%= projectName %>';
-var description = 'A new Yeogurt site.';
+var description = 'A new Pistacheo application.';
 
 // Local server settings
 var host = '127.0.0.1';
@@ -27,14 +27,12 @@ var directories = {
   // Temporary directory: temporary development files location
   temporary: 'tmp',
 
-  // Extra configurable directories<% if (singlePageApplication) { %>
-  screens: '_screens',<% } %>
-  modules: '_modules',
-  layouts: '_layouts',
+  // Extra configurable directories
+  modules: 'modules',
+  layouts: 'layouts',
   images: '_images',
   styles: '_styles',
-  scripts: '_scripts',
-  docs: '_docs'
+  scripts: '_scripts'
 };
 
 module.exports = {
