@@ -14,9 +14,9 @@ var taskConfig = function(grunt) {
       },
       files: [{
         expand: true,
-        cwd: '<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.images %>',
+        cwd: '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.images %>',
         src: '**/*.{jpg,jpeg,gif,png,svg}',
-        dest: '<%%= yeogurt.directories.temporary %>/<%%= yeogurt.directories.images.replace(/^_/, "") %>'
+        dest: '<%%= pistacheo.directories.temporary %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.images.replace(/^_/, "") %>'
       }]
     },
     build: {
@@ -25,9 +25,9 @@ var taskConfig = function(grunt) {
       },
       files: [{
         expand: true,
-        cwd: '<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.images %>',
+        cwd: '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.images %>',
         src: '**/*.{jpg,jpeg,gif,png,svg}',
-        dest: '<%%= yeogurt.directories.destination %>/<%%= yeogurt.directories.images.replace(/^_/, "") %>'
+        dest: '<%%= pistacheo.directories.destination %>/<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.images.replace(/^_/, "") %>'
       }]
     }
   });

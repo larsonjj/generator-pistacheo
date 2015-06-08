@@ -1,12 +1,17 @@
 // Database Configuration
 
 'use strict';
-var settings = require('./env/default');
+
+// Configuration file(s)
+var config = require('../../pistacheo.conf');
+
+// Libs
 var Sequelize = require('sequelize');
+
 var db = {};
 
 // Connect to database
-var sequelize = new Sequelize(settings.database.url, settings.database.options);
+var sequelize = new Sequelize(config.database.url, config.database.options);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

@@ -8,17 +8,12 @@ var taskConfig = function(grunt) {
     images: [
       'imagemin:build'
     ],
-    compile: [<% if (htmlOption === 'jade') { %>
-      'jade:build',<% } else if (htmlOption === 'swig') {  %>
-      'swig:build',<% } %><% if (cssOption === 'less') { %>
+    compile: [<% if (cssOption === 'less') { %>
       'less:build',<% } %><% if (cssOption === 'sass') { %>
       'sass:build',<% } %><% if (cssOption === 'stylus') { %>
-      'stylus:build',<% } %><% if (jsOption === 'browserify') { %>
-      'browserify:build'<% } %>
-    ],<% if (useDashboard) { %>
-    docs: [
-      'dashboard:build'
-    ]<% } %>
+      'stylus:build',<% } %>
+      'browserify:build'
+    ]
   });
 
 };

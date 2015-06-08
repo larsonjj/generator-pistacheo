@@ -15,10 +15,8 @@ var taskFiles = function taskFiles() {
   this.template('grunt/config/util/concurrent.js', 'grunt/config/util/concurrent.js');
   this.template('grunt/config/util/copy.js', 'grunt/config/util/copy.js');
 
-  if (this.useServer) {
-    // Open (handles opening default web browser)
-    this.template('grunt/config/util/open.js', 'grunt/config/util/open.js');
-  }
+  // Open (handles opening default web browser)
+  this.template('grunt/config/util/open.js', 'grunt/config/util/open.js');
 
   // ========
   // Compile
@@ -82,10 +80,8 @@ var taskFiles = function taskFiles() {
   this.template('grunt/tasks/serve.js', 'grunt/tasks/serve.js');
   this.template('grunt/tasks/test.js', 'grunt/tasks/test.js');
 
-  if (this.useServer) {
-    this.template('grunt/tasks/keepalive.js', 'grunt/tasks/keepalive.js');
-    this.template('grunt/tasks/wait.js', 'grunt/tasks/wait.js');
-  }
+  this.template('grunt/tasks/keepalive.js', 'grunt/tasks/keepalive.js');
+  this.template('grunt/tasks/wait.js', 'grunt/tasks/wait.js');
 };
 
 module.exports = taskFiles;

@@ -5,7 +5,7 @@
 'use strict';
 
 var imageFiles = function imageFiles() {
-  this.copy('src/default/_images/yeogurt-swirl.png', 'src/_images/yeogurt-swirl.png');
+  this.copy('src/public/_images/pistacheo-icon.png', 'src/public/_images/pistacheo-icon.png');
 };
 
 module.exports = imageFiles;

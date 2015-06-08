@@ -1,8 +1,6 @@
 // Configuration for Watch task(s)
 // Runs specified tasks when file changes are detected
 'use strict';
-<% if (useKss || useJsdoc || useDashboard) { %>
-var _ = require('lodash');<% } %>
 
 var taskConfig = function(grunt) {
 
@@ -22,7 +20,7 @@ var taskConfig = function(grunt) {
     },
     images: {
       files: [
-        '<%%= yeogurt.directories.images %>/**/*.{jpg,jpeg,gif,png,svg}',
+        '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.images %>/**/*.{jpg,jpeg,gif,png,svg}',
       ],
       tasks: [
         'newer:imagemin:serve'
@@ -30,72 +28,31 @@ var taskConfig = function(grunt) {
     },
     copy: {
       files: [
-        '<%%= yeogurt.directories.source %>/**/*',
-        '!<%%= yeogurt.directories.source %>/**/\_*/**',
+        '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/**/*',
+        '!<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/**/\_*/**'<% if (htmlOption === 'swig') { %>,
+        '!<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/**/*.swig'<% } else if (htmlOption === 'jade') { %>,
+        '!<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/**/*.jade'<% } %>
       ],
       tasks: [
         'newer:copy:serve'
       ]
-    },<% if (htmlOption === 'jade' && !useServer) { %>
-    jade: {
-      files: [
-        '<%%= yeogurt.directories.source %>/**/*.jade',
-        '!<%%= yeogurt.directories.source %>/**/+(<%%= yeogurt.directories.modules %>,<%%= yeogurt.directories.layouts %>)/**/*.jade'
-      ],
-      tasks: [
-        'newer:jade:serve'
-      ]
-    },
-    jadePartials: {
-      files: [
-        '<%%= yeogurt.directories.source %>/**/+(<%%= yeogurt.directories.modules %>,<%%= yeogurt.directories.layouts %>)/**/*.jade'
-      ],
-      tasks: [
-        'jade:serve'
-      ]
-    },<% } %><% if (htmlOption === 'swig' && !useServer) { %>
-    swig: {
-      files: [
-        '<%%= yeogurt.directories.source %>/**/*.jade',
-        '!<%%= yeogurt.directories.source %>/**/+(<%%= yeogurt.directories.modules %>,<%%= yeogurt.directories.layouts %>)/**/*.swig'
-      ],
-      tasks: [
-        'newer:swig:serve'
-      ]
-    },
-    swigPartials: {
-      files: [
-        '<%%= yeogurt.directories.source %>/**/+(<%%= yeogurt.directories.modules %>,<%%= yeogurt.directories.layouts %>)/**/*.swig'
-      ],
-      tasks: [
-        'swig:serve'
-      ]
-    },<% } %><% if (jsFramework === 'angular') { %>
-    html: {
-      files: [
-        '<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.screens %>/**/*.html',
-        '<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.modules %>/**/*.html'
-      ],
-      tasks: [
-        'ngtemplates'
-      ]
-    },<% } %><% if (cssOption === 'sass') { %>
+    },<% if (cssOption === 'sass') { %>
     sass: {
-      files: ['<%%= yeogurt.directories.source %>/**/*.<% if (useKss) { %>{scss,sass,md}<% } else { %>{scss,sass}<% } %>'],
+      files: ['<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/**/*.{scss,sass}'],
       tasks: [
         'sass:serve',
         'autoprefixer:serve'
       ]
     },<% } %><% if (cssOption === 'less') { %>
     less: {
-      files: ['<%%= yeogurt.directories.source %>/**/*.<% if (useKss) { %>{less,md}<% } else { %>less<% } %>'],
+      files: ['<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/**/*.less'],
       tasks: [
         'less:serve',
         'autoprefixer:serve'
       ]
     },<% } %><% if (cssOption === 'stylus') { %>
     stylus: {
-      files: ['<%%= yeogurt.directories.source %>/**/*.<% if (useKss) { %>{styl,md}<% } else { %>styl<% } %>'],
+      files: ['<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/**/*.styl'],
       tasks: [
         'stylus:serve',
         'autoprefixer:serve'
@@ -103,52 +60,38 @@ var taskConfig = function(grunt) {
     },<% } %>
     css: {
       files: [
-        '<%%= yeogurt.directories.source %>/**/*.css'
+        '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/**/*.css'
       ],
       tasks: [
         'autoprefixer:serve'
       ]
     },
     js: {
-      files: [<% if (singlePageApplication) { %>
-        '<%%= yeogurt.directories.source %>/+(<%%= yeogurt.directories.screens %>)/**/*.<% if (jsFramework === 'react') { %>{js,jsx}<% } else { %>js<% } %>',<% } %>
-        '<%%= yeogurt.directories.source %>/+(<%%= yeogurt.directories.scripts %>)/**/*.<% if (jsFramework === 'react') { %>{js,jsx}<% } else { %>js<% } %>',
-        '<%%= yeogurt.directories.source %>/+(<%%= yeogurt.directories.modules %>)/**/*.<% if (jsFramework === 'react') { %>{js,jsx}<% } else { %>js<% } %>'
+      files: [
+        '<%%= pistacheo.directories.source %>/**/*.js',
+        '!<%%= pistacheo.directories.source %>/**/vendor/**/*.js'
       ],
       tasks: [
         'newer:eslint'
       ]
-    },<% if (jsFramework === 'marionette') { %>
-    jst: {
-      files: ['<%%= yeogurt.directories.source %>/templates/**/*.jst'],
-      tasks: [
-        'jst:serve'
-      ]
-    },<% } %>
+    },
     livereload: {
       options: {
         livereload: 35729
       },
       files: [
-        '<%%= yeogurt.directories.source %>/*.{ico,png,txt}',<% if (htmlOption === 'swig' || htmlOption === 'jade') { %>
-        '<%%= yeogurt.directories.temporary %>/**/*.html',<% } else { %>
-        '<%%= yeogurt.directories.source %>/**/*.html',<% } %><% if (cssOption !== 'css') { %>
-        '<%%= yeogurt.directories.temporary %>/**/*.{css,ttf,otf,woff,svg,eot}',<% } else { %>
-        '<%%= yeogurt.directories.source %>/**/*.{css,ttf,otf,woff,svg,eot}',<% } %><% if (jsOption === 'browserify') { %>
-        '<%%= yeogurt.directories.temporary %>/**/*.<% if (jsFramework === 'react') { %>{js,jsx}<% } else { %>js<% } %>',<% } else { %><% if (jsFramework === 'angular') { %>
-        '<%%= yeogurt.directories.source %>/**/*.<% if (jsFramework === 'react') { %>{js,jsx}<% } else { %>js<% } %>',
-        '!<%%= yeogurt.directories.source %>/**/*.{spec,mock}.js',<% } else { %>
-        '<%%= yeogurt.directories.source %>/**/*.js',<% } %><% } %><% if (singlePageApplication && jsFramework !== 'react') { %>
-        '<%%= yeogurt.directories.temporary %>/templates/**/*.js',<% } %>
-        '<%%= yeogurt.directories.source %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
+        '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/*.{ico,png,txt}',
+        '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/**/*.{css,ttf,otf,woff,svg,eot}',
+        '<%%= pistacheo.directories.temporary %>/<%%= pistacheo.directories.public %>/**/*.js',
+        '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.images %>/**/*.{png,jpg,jpeg,gif,webp,svg}'
       ]
-    }<% if (useServer) { %>,
+    },
     express: {
       files: [
-        '<%%= yeogurt.directories.server %>/server.js',
-        '<%%= yeogurt.directories.server %>/**/*.{js,json,html}'<% if (htmlOption === 'swig') { %>,
-        '<%%= yeogurt.directories.server %>/**/*.swig'<% } %><% if (htmlOption === 'jade') { %>,
-        '<%%= yeogurt.directories.server %>/**/*.jade'<% } %>
+        '<%%= pistacheo.directories.source %>/server.js',
+        '<%%= pistacheo.directories.source %>/**/*.{js,json,html}'<% if (htmlOption === 'swig') { %>,
+        '<%%= pistacheo.directories.source %>/**/*.swig'<% } %><% if (htmlOption === 'jade') { %>,
+        '<%%= pistacheo.directories.source %>/**/*.jade'<% } %>
       ],
       tasks: [
         'express:serve',
@@ -158,55 +101,10 @@ var taskConfig = function(grunt) {
         livereload: true,
         nospawn: true // Without this option specified express won't be reloaded
       }
-    }<% } %>
-  };<% if (useKss || useJsdoc || useDashboard) { %>
+    }
+  };
 
-  // Documentation specific configuration
-  var docsConfig = {<% if (htmlOption === 'jade' && useDashboard) { %>
-    jade: {
-      tasks: [
-        'dashboard:serve'
-      ],
-      files: [
-        '<%%= yeogurt.directories.source %>/**/*.dash.json'
-      ]
-    },
-    jadePartials: {
-      tasks: [
-        'dashboard:serve'
-      ]
-    },<% } %><% if (htmlOption === 'swig' && useDashboard) { %>
-    swig: {
-      tasks: [
-        'dashboard:serve'
-      ],
-      files: [
-        '<%%= yeogurt.directories.source %>/**/*.dash.json'
-      ]
-    },
-    swigPartials: {
-      tasks: [
-        'dashboard:serve'
-      ]
-    },<% } %><% if (useDashboard) { %>
-    dashboard: {
-      files: [
-        '<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.docs %>/dashboard/**/*'
-      ],
-      tasks: ['dashboard:serve']
-    }<% } %>
-  };<% } %>
-
-  grunt.config.set('watch', config);<% if (useKss || useJsdoc || useDashboard) { %>
-
-  grunt.registerTask('listen:docs', function() {
-    // Merge docsConfig object with the config object without overwriting arrays
-    // Instead concatenate all arrays with each other
-    grunt.config('watch', _.merge(config, docsConfig, function(a, b) {
-      return _.isArray(a) ? a.concat(b) : undefined;
-    }));
-    grunt.task.run('watch');
-  });<% } %>
+  grunt.config.set('watch', config);
 
 };
 

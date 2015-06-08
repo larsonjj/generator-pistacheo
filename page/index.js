@@ -6,7 +6,7 @@ var path = require('path');
 var yeogurtConf;
 
 try {
-  yeogurtConf = require(path.join(process.cwd(), './yeogurt.conf'));
+  yeogurtConf = require(path.join(process.cwd(), './pistacheo.conf'));
   var directories = yeogurtConf.directories;
 }
 catch(e) {
@@ -32,8 +32,6 @@ var PageGenerator = module.exports = function PageGenerator() {
   this.useTesting = fileJSON.useTesting;
   this.useJsx = fileJSON.useJsx;
   this.htmlOption = fileJSON.htmlOption;
-  this.useDashboard = fileJSON.useDashboard;
-  this.useServer = fileJSON.useServer;
   this.useServerTesting = fileJSON.useServerTesting;
 
 };
@@ -59,9 +57,6 @@ PageGenerator.prototype.ask = function ask() {
     message: 'What layout would you like to extend from?',
     default: yeogurtConf ? directories.source + '/' + directories.layouts + '/base' : directories.source + '/layouts/base'
   }, {
-    when: function() {
-      return self.useServer;
-    },
     name: 'generateFrontend',
     message: 'Would you like to generate src assets (JS, ' + self.cssOption.toUpperCase() + ') for this module?',
     type: 'confirm'
@@ -137,101 +132,53 @@ PageGenerator.prototype.ask = function ask() {
 
 PageGenerator.prototype.files = function files() {
 
-  if (!this.singlePageApplication) {
-
-    if (!this.useServer && this.moduleLocation !== 'server' || this.moduleLocation === 'server') {
-      if (this.htmlOption === 'jade') {
-        if (this.type === 'module') {
-          this.template('module.jade', this.pageFile + '.jade');
-          if (this.useDashboard) {
-            this.template('module.dash.jade', this.dashFile + '.jade');
-            this.template('module.dash.json', this.dashFile + '.json');
-          }
-        }
-        else if (this.type === 'layout') {
-          this.template('module.layout.jade', this.pageFile + '.jade');
-          if (this.moduleLocation === 'server') {
-            return;
-          }
-        }
-        // Default to page type
-        else {
-          this.template('module.page.jade', this.pageFile + '.jade');
-          if (this.useDashboard) {
-            this.template('module.dash.json', this.dashFile + '.json');
-          }
-        }
-      }
-      else if (this.htmlOption === 'swig') {
-        if (this.type === 'module') {
-          this.template('module.swig', this.pageFile + '.swig');
-          if (this.useDashboard) {
-            this.template('module.dash.swig', this.dashFile + '.swig');
-            this.template('module.dash.json', this.dashFile + '.json');
-          }
-        }
-        else if (this.type === 'layout') {
-          this.template('module.layout.swig', this.pageFile + '.swig');
-          if (this.moduleLocation === 'server') {
-            return;
-          }
-        }
-        // Default to page type
-        else {
-          this.template('module.page.swig', this.pageFile + '.swig');
-          if (this.useDashboard) {
-            this.template('module.dash.json', this.dashFile + '.json');
-          }
-        }
-      }
-
+  if (this.htmlOption === 'jade') {
+    if (this.type === 'module') {
+      this.template('module.jade', this.pageFile + '.jade');
     }
-
-    if (this.type === 'module' && (this.moduleLocation !== 'server' || this.generateFrontend)) {
-      if (this.jsOption === 'browserify') {
-        this.template('module.js', this.pageFile.replace('server', 'src') + '.js');
-        if (this.useTesting) {
-          this.template('module.spec.js', this.testFile.replace('server', 'src') + '.spec.js');
-        }
+    else if (this.type === 'layout') {
+      this.template('module.layout.jade', this.pageFile + '.jade');
+      if (this.moduleLocation === 'server') {
+        return;
       }
     }
-
-    if (this.moduleLocation === 'server') {
-      this.template('server/package.json', this.packageFile + '.json');
-      this.template('server/module.js', this.pageFile + '.js');
-      this.template('server/module.controller.js', this.pageFile + '.controller.js');
-      if (this.useServerTesting) {
-        this.template('server/module.spec.js', this.testFile + '.spec.js');
-      }
+    // Default to page type
+    else {
+      this.template('module.page.jade', this.pageFile + '.jade');
     }
   }
-  else if (this.jsFramework === 'angular') {
-    this.template('angular/module.js', this.pageFile + '.js');
-    this.template('angular/module.controller.js', this.pageFile + '.controller.js');
-    this.template('angular/module.html', this.pageFile + '.html');
-
-    if (this.useTesting) {
-      this.template('angular/module.spec.js', this.testFile + '.controller.spec.js');
+  else if (this.htmlOption === 'swig') {
+    if (this.type === 'module') {
+      this.template('module.swig', this.pageFile + '.swig');
+    }
+    else if (this.type === 'layout') {
+      this.template('module.layout.swig', this.pageFile + '.swig');
+      if (this.moduleLocation === 'server') {
+        return;
+      }
+    }
+    // Default to page type
+    else {
+      this.template('module.page.swig', this.pageFile + '.swig');
     }
   }
-  else if (this.jsFramework === 'react') {
-    if (this.useJsx) {
-      this.template('react/module.jsx', this.pageFile + '.jsx');
-    }
 
-    if (this.useTesting) {
-      this.template('react/module.spec.js', this.testFile + '.spec.js');
-    }
-  }
-  else if (this.jsFramework === 'marionette') {
+  if (this.type === 'module' && (this.moduleLocation !== 'server' || this.generateFrontend)) {
     if (this.jsOption === 'browserify') {
-      this.template('backbone/browserify/module.js', this.pageFile + '.js');
+      this.template('module.js', this.pageFile.replace('server', 'src') + '.js');
       if (this.useTesting) {
-        this.template('backbone/browserify/module.spec.js', this.testFile + '.spec.js');
+        this.template('module.spec.js', this.testFile.replace('server', 'src') + '.spec.js');
       }
     }
+  }
 
-    this.template('backbone/module.html', this.pageFile + '.jst');
+  if (this.moduleLocation === 'server') {
+    this.template('server/package.json', this.packageFile + '.json');
+    this.template('server/module.js', this.pageFile + '.js');
+    this.template('server/module.controller.js', this.pageFile + '.controller.js');
+    if (this.useServerTesting) {
+      this.template('server/module.spec.js', this.testFile + '.spec.js');
+    }
   }
 
   if (this.type !== 'page' && (this.moduleLocation !== 'server' || this.generateFrontend)) {

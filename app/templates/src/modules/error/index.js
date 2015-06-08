@@ -1,5 +1,9 @@
 'use strict';
 
+// Configuration file(s)
+var config = require('../../../pistacheo.conf');
+
+// Libs
 var path = require('path');
 
 // Send error based on request 'Accept' header
@@ -25,8 +29,15 @@ var sendError = function sendError(err, res) {
 };
 
 // Handle 404 and 500 errors
-var errors = function errors(errorCode, templatePath) {
-  var viewPath = path.join(templatePath || 'modules/error', errorCode);
+var errors = function errors(errorCode) {
+  var viewPath = path.join(
+    config.directories.root,
+    config.directories.source,
+    config.directories.modules,
+    '/error',
+    errorCode
+  );
+
   var status = errorCode || 500;
 
   // 404 errors

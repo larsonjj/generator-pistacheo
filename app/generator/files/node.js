@@ -5,31 +5,29 @@
 'use strict';
 
 var nodeFiles = function nodeFiles() {
-  if (this.useServer) {
-    if (this.dbOption === 'mongodb') {
-      this.template('server/config/mongodb/database.js', 'server/config/database.js');
-    }
-    if (this.dbOption === 'sql') {
-      this.template('server/config/sql/database.js', 'server/config/database.js');
-    }
-
-    this.template('server/config/express.js', 'server/config/express.js');
-    this.template('server/config/secrets.js', 'server/config/secrets.js');
-
-    this.template('server/config/security.js', 'server/config/security.js');
-
-    this.template('server/config/env/default.js', 'server/config/env/default.js');
-    this.template('server/config/env/development.js', 'server/config/env/development.js');
-    this.template('server/config/env/production.js', 'server/config/env/production.js');
-    this.template('server/config/env/test.js', 'server/config/env/test.js');
-
-    this.template('server/routes.js', 'server/routes.js');
-
-    this.template('server/server.js', 'server/server.js');
-    this.template('server/home/home.js', 'server/home/home.js');
-    this.template('server/home/home.controller.js', 'server/home/home.controller.js');
-    this.template('server/home/package.json', 'server/home/package.json');
+  if (this.dbOption === 'mongodb') {
+    this.template('src/config/mongodb/database.js', 'src/config/database.js');
+    this.template('src/server.mongodb.js', 'src/server.js');
   }
+  if (this.dbOption === 'sql') {
+    this.template('src/config/sql/database.js', 'src/config/database.js');
+    this.template('src/server.sql.js', 'src/server.js');
+  }
+  else {
+    this.template('src/server.nodb.js', 'src/server.js');
+  }
+
+  this.template('src/config/express.js', 'src/config/express.js');
+  this.template('src/config/secrets.js', 'src/config/secrets.js');
+
+  this.template('src/config/env/development.js', 'src/config/env/development.js');
+  this.template('src/config/env/production.js', 'src/config/env/production.js');
+  this.template('src/config/env/test.js', 'src/config/env/test.js');
+
+  this.template('src/routes.js', 'src/routes.js');
+
+  this.template('src/pages/home/index.js', 'src/pages/home/index.js');
+  this.template('src/pages/home/home.controller.js', 'src/pages/home/home.controller.js');
 };
 
 module.exports = nodeFiles;

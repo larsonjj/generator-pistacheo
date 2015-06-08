@@ -8,35 +8,35 @@ var taskConfig = function(grunt) {
     serve: {
       options: {
         paths: [
-          '<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.styles %>'<% if (jsFramework === 'angular') { %>,
-          '<%%= yeogurt.directories.source %>/{<%%= yeogurt.directories.modules %>,<%%= yeogurt.directories.styles %>}/'<% } %>
+          '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles %>'
         ],
         sourceMap: true,
-        sourceMapFilename: '<%%= yeogurt.directories.temporary %>/<%%= yeogurt.directories.styles %>/main.css.map',
-        sourceMapBasepath: '<%%= yeogurt.directories.temporary %>/<%%= yeogurt.directories.styles %>/',
+        sourceMapFilename: '<%%= pistacheo.directories.temporary %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles %>/main.css.map',
+        sourceMapBasepath: '<%%= pistacheo.directories.temporary %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles %>/',
         sourceMapRootpath: '',
         dumpLineNumbers: 'comments',
         outputSourceFiles: true
       },
       files: {
-        '<%%= yeogurt.directories.temporary %>/<%%= yeogurt.directories.styles.replace(/^_/, "") %>/main.css': '<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.styles %>/main.less'
+        '<%%= pistacheo.directories.temporary %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles.replace(/^_/, "") %>/main.css':
+          '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles %>/main.less'
       }
     },
     build: {
       options: {
         paths: [
-          '<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.styles %>'<% if (jsFramework === 'angular') { %>,
-          '<%%= yeogurt.directories.source %>/{<%%= yeogurt.directories.modules %>,<%%= yeogurt.directories.styles %>}/'<% } %>
+          '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles %>'
         ],
         sourceMap: true,
-        sourceMapFilename: '<%%= yeogurt.directories.destination %>/<%%= yeogurt.directories.styles %>/main.css.map',
-        sourceMapBasepath: '<%%= yeogurt.directories.destination %>/<%%= yeogurt.directories.styles %>/',
+        sourceMapFilename: '<%%= pistacheo.directories.destination %>/<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles %>/main.css.map',
+        sourceMapBasepath: '<%%= pistacheo.directories.destination %>/<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles %>/',
         sourceMapRootpath: './',
         compress: true,
         outputSourceFiles: true
       },
       files: {
-        '<%%= yeogurt.directories.temporary %>/<%%= yeogurt.directories.styles.replace(/^_/, "") %>/main.css': '<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.styles %>/main.less'
+        '<%%= pistacheo.directories.destination %>/<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles.replace(/^_/, "") %>/main.css':
+          '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles %>/main.less'
       }
     }
   });

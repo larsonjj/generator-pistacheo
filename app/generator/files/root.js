@@ -10,7 +10,7 @@ var rootFiles = function rootFiles() {
   // root (/)
   this.template('Gruntfile.js', 'Gruntfile.js');
   this.template('_package.json', 'package.json');
-  this.template('yeogurt.conf.js', 'yeogurt.conf.js');
+  this.template('pistacheo.conf.js', 'pistacheo.conf.js');
   this.template('README.md', 'README.md');
 
   if (this.versionControl === 'svn') {
@@ -26,8 +26,8 @@ var rootFiles = function rootFiles() {
     this.copy('svnignore', '.svnignore');
   }
 
-  this.copy('src/default/robots.txt', 'src/robots.txt');
-  this.copy('src/default/favicon.ico', 'src/favicon.ico');
+  this.copy('src/public/robots.txt', 'src/robots.txt');
+  this.copy('src/public/favicon.ico', 'src/favicon.ico');
 
   this.copy('editorconfig', '.editorconfig');
   this.template('eslintrc', '.eslintrc');

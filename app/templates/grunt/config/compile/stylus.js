@@ -12,12 +12,12 @@ var taskConfig = function(grunt) {
           inline: true
         },
         paths: [
-          '<%%= yeogurt.directories.source %>/{<%%= yeogurt.directories.modules %>,<%%= yeogurt.directories.styles %>}/'<% if (jsFramework === 'angular') { %>,
-          '<%%= yeogurt.directories.source %>/{<%%= yeogurt.directories.modules %>,<%%= yeogurt.directories.styles %>}/'<% } %>
+          '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>'
         ]
       },
       files: {
-        '<%%= yeogurt.directories.temporary %>/<%%= yeogurt.directories.styles.replace(/^_/, "") %>/main.css': '<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.styles %>/main.styl'
+        '<%%= pistacheo.directories.temporary %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles.replace(/^_/, "") %>/main.css':
+          '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles %>/main.styl'
       }
     },
     build: {
@@ -25,12 +25,12 @@ var taskConfig = function(grunt) {
         compress: true,
         sourcemap: false, // external sourcemap not supported yet
         paths: [
-          '<%%= yeogurt.directories.source %>/{<%%= yeogurt.directories.modules %>,<%%= yeogurt.directories.styles %>}/'<% if (jsFramework === 'angular') { %>,
-          '<%%= yeogurt.directories.source %>/{<%%= yeogurt.directories.modules %>,<%%= yeogurt.directories.styles %>}/'<% } %>
+          '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/'
         ]
       },
       files: {
-        '<%%= yeogurt.directories.destination %>/<%%= yeogurt.directories.styles.replace(/^_/, "") %>/main.css': '<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.styles %>/main.styl'
+        '<%%= pistacheo.directories.destination %>/<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles.replace(/^_/, "") %>/main.css':
+          '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles %>/main.styl'
       }
     }
   });

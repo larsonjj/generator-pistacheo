@@ -2,22 +2,24 @@
 
 'use strict';
 
+// Configuration file(s)
+var secrets = require('./secrets');
+var config = require('../../pistacheo.conf');
+
+// Libs
+var path = require('path');
+var lusca = require('lusca');
+var logger = require('morgan');
 var compress = require('compression');
 var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var path = require('path');
 var methodOverride = require('method-override');
 var errorHandler = require('errorhandler');
 var session = require('express-session');
-var errors = require('../modules/error');
-var routes = require('../app/routes');
 
-// Configuration files
-var secrets = require('./secrets');
-var settings = require('./env/default');
-var security = require('./security');
+var errors = require(path.join(config.directories.root, config.directories.source, config.directories.modules, 'error'));
+var routes = require(path.join(config.directories.root, config.directories.source, 'routes'));
 
 var expressConfig = function(app, express<% if (dbOption !== 'none') { %>, db<% } %>) {
 
@@ -32,16 +34,14 @@ var expressConfig = function(app, express<% if (dbOption !== 'none') { %>, db<% 
   app.disable('x-powered-by');
 
   // Setup port for server to run on
-  app.set('port', settings.server.port);
+  app.set('port', config.port);
 
-   // Setup view engine for server side templating<% if (singlePageApplication) { %>
-  app.engine('.html', require('ejs').__express);
-  app.set('view engine', 'html');<% } %><% if (!singlePageApplication) { %>
+   // Setup view engine for server side templating
   app.engine('<%= htmlOption === 'jade' ? 'jade' : '' %><%= htmlOption === 'swig' ? 'swig' : '' %>', require('<%= htmlOption %>').renderFile);
-  app.set('view engine', '<%= htmlOption === 'jade' ? 'jade' : '' %><%= htmlOption === 'swig' ? 'swig' : '' %>');<% } %>
+  app.set('view engine', '<%= htmlOption === 'jade' ? 'jade' : '' %><%= htmlOption === 'swig' ? 'swig' : '' %>');
 
   // Setup path where all server templates will reside
-  app.set('views', path.join(settings.root, 'server'));
+  app.set('views', path.join(config.directories.root, config.directories.source));
 
   // Enable GZip compression for all static assets
   app.use(compress());
@@ -49,18 +49,31 @@ var expressConfig = function(app, express<% if (dbOption !== 'none') { %>, db<% 
   if (env === 'development') {
     // Include livereload script on all pages
     app.use(require('connect-livereload')());
-    // Load bower_components
-    app.use(express.static(path.join(settings.root, 'tmp'), {maxAge: 0}));
-    app.use('/bower_components', express.static(path.join(settings.root, 'client/bower_components'), {maxAge: 0}));
 
     // Load static assets with no-cache
-    app.use(express.static(path.join(settings.root, settings.staticAssets), {maxAge: 0}));
+    app.use(
+      express.static(
+        path.join(
+          config.directories.root,
+          config.directories.temporary,
+          config.directories.public
+        ), {maxAge: 0}
+      )
+    );
   }
   // Load favicon
-  app.use(favicon(path.join(settings.root, settings.staticAssets, '/favicon.ico')));
+  app.use(favicon(path.join(config.directories.root, config.directories.source, '/favicon.ico')));
   if (env !== 'development') {
     // Load static assets cached
-    app.use(express.static(path.join(settings.root, settings.staticAssets), {maxAge: week}));
+    app.use(
+      express.static(
+        path.join(
+          config.directories.root,
+          config.directories.source,
+          config.directories.public
+        ), {maxAge: week}
+      )
+    );
   }
 
   // Returns middleware that parses both json and urlencoded.
@@ -92,16 +105,17 @@ var expressConfig = function(app, express<% if (dbOption !== 'none') { %>, db<% 
   }));
 
   // Initialize Security
-  app.use(security);
+  app.use(lusca(config.security.config));
 
   app.use(function(req, res, next) {
     // Make Node environment available in templates
     res.locals.env = env;
+    res.locals.pistacheo = config;
     next();
   });
 
   // Setup log level for server console output
-  app.use(logger(settings.server.logLevel));
+  app.use(logger(config.logLevel));
 
   // Load routes
   routes(app);

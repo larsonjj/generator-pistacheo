@@ -11,14 +11,14 @@ var taskConfig = function(grunt) {
     },
     serve: {
       options: {
-        script: '<%%= yeogurt.directories.server %>/server.js',
+        script: '<%%= pistacheo.directories.source %>/server.js',
         node_env: 'development',
         debug: true
       }
     },
     build: {
       options: {
-        script: '<%%= yeogurt.directories.destination %>/<%%= yeogurt.directories.server %>/server.js',
+        script: '<%%= pistacheo.directories.destination %>/<%%= pistacheo.directories.source %>/server.js',
         node_env: 'production'
       }
     }

@@ -15,7 +15,6 @@ var APIGenerator = module.exports = function APIGenerator() {
   this.jsFramework = fileJSON.jsFramework;
   this.testFramework = fileJSON.testFramework;
   this.useTesting = fileJSON.useTesting;
-  this.useServer = fileJSON.useServer;
   this.useServerTesting = fileJSON.useServerTesting;
   this.dbOption = fileJSON.dbOption;
 

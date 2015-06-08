@@ -5,8 +5,8 @@
 var taskConfig = function(grunt) {
 
   grunt.config.set('clean', {
-    build: ['<%%= yeogurt.directories.destination %>'],
-    tmp: ['<%%= yeogurt.directories.temporary %>']
+    build: ['<%%= pistacheo.directories.destination %>'],
+    tmp: ['<%%= pistacheo.directories.temporary %>']
   });
 
 };

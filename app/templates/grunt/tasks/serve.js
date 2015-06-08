@@ -8,25 +8,19 @@ var taskConfig = function(grunt) {
   grunt.registerTask('serve', 'Open a development server within your browser', function(target) {
 
     if (target === 'build') {
-      return grunt.task.run(['build',<% if (useServer) { %>
-      'env:all', 'env:prod', 'express:build', 'open', 'keepalive'<% } else { %> 'browserSync:build:keepalive'<% } %>]);
+      return grunt.task.run(['build',
+      'env:all', 'env:prod', 'express:build', 'open', 'keepalive']);
     }
 
     grunt.task.run([
-      'clean:tmp',<% if (useServer) { %>
-      'env:all',<% } %>
+      'clean:tmp',
+      'env:all',
       'imagemin:serve',
-      'copy:serve',<% if (jsFramework === 'angular') { %>
-      'ngtemplates:compile',<% } %><% if (htmlOption === 'jade' && !useServer ) { %>
-      'jade:serve',<% } else if (htmlOption === 'swig' && !useServer ) {  %>
-      'swig:serve',<% } %><% if (jsOption === 'browserify') { %>
-      'browserify:serve',<% } %><% if (cssOption === 'less') { %>
+      'copy:serve',
+      'browserify:serve',<% if (cssOption === 'less') { %>
       'less:serve',<% } %><% if (cssOption === 'sass') { %>
       'sass:serve',<% } %><% if (cssOption === 'stylus') { %>
-      'stylus:serve',<% } %><% if (useDashboard) { %>
-      'dashboard:serve',<% } %><% if (useKss) { %>
-      'styleguide:serve',<% } %><% if (useJsdoc) { %>
-      'jsdoc:serve',<% } %>
+      'stylus:serve',<% } %>
       'postcss:serve'
     ]);
 
@@ -34,19 +28,13 @@ var taskConfig = function(grunt) {
       return true;
     }
 
-    grunt.task.run([<% if (useServer) { %>
+    grunt.task.run([
       'express:serve',
       'wait',
-      'open'<% } else { %>
-      'browserSync:serve'<% } %>
-    ]);<% if (useKss || useJsdoc || useDashboard) { %>
+      'open'
+    ]);
 
-    if (target === 'docs') {
-      return grunt.task.run(['listen:docs']);
-    }
-
-    return grunt.task.run(['watch']);<% } else { %>
-    return grunt.task.run(['watch']);<% } %>
+    return grunt.task.run(['watch']);
   });
 };
 

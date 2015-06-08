@@ -4,12 +4,12 @@
 var fs = require('fs');
 var path = require('path');
 
-var config = require('./yeogurt.conf');
+var config = require('./pistacheo.conf');
 
 module.exports = function(grunt) {
 
   // setup configuration object
-  grunt.config.set('yeogurt', config);
+  grunt.config.set('pistacheo', config);
 
   // show elapsed time at the end
   require('time-grunt')(grunt);
@@ -17,9 +17,9 @@ module.exports = function(grunt) {
   // Load all grunt tasks with JIT (Makes task loading super fast!)
   require('jit-grunt')(grunt, {
     // translate browsersync task to use the 'grunt-browser-sync' plugin
-    browserSync: 'grunt-browser-sync'<% if (useServer) { %>,
+    // browserSync: 'grunt-browser-sync',
     // translate express task to use the 'grunt-express-server' plugin
-    express: 'grunt-express-server'<% } %><% if (useE2e) { %>,
+    express: 'grunt-express-server'<% if (useE2e) { %>,
     // translate protractor task to use the 'protractor-runner' plugin
     protractor: 'grunt-protractor-runner'<% } %>
   });
@@ -67,8 +67,7 @@ module.exports = function(grunt) {
 
   // Run task functions to configure Grunt.
   invokeConfigFn(utilConfig);
-  invokeConfigFn(compileConfig);<% if (useDashboard) { %>
-  invokeConfigFn(docConfig);<% } %>
+  invokeConfigFn(compileConfig);
   invokeConfigFn(optimizeConfig);
   invokeConfigFn(serverConfig);
   invokeConfigFn(testConfig);

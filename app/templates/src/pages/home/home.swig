@@ -2,13 +2,13 @@
 
 {% block content %}
 <div class="main-container">
-  <div class="yeogurt-info">
-    <h1>Welcome to Yeogurt!</h1>
+  <div class="pistacheo-info">
+    <h1>Welcome to Pistacheo!</h1>
     <p>
-      Take a look at the <a href="https://github.com/larsonjj/generator-yeogurt#yeogurt-generator---">documentation</a> and start mixing up something awesome.
+      Take a look at the <a href="https://github.com/larsonjj/generator-pistacheo#pistacheo-generator---">documentation</a> and start mixing up something awesome.
     </p>
     <p>
-      <img src="/images/yeogurt-swirl.png" width="75px" class="logo" />
+      <img src="/images/pistacheo-icon.png" width="75px" class="logo" />
     </p>
   </div>
 </div>

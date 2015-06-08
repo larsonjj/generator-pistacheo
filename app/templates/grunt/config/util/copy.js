@@ -8,8 +8,8 @@ var taskConfig = function(grunt) {
     serve: {
       files: [{
          expand: true,
-          cwd: '<%%= yeogurt.directories.source %>/',
-          dest: '<%%= yeogurt.directories.temporary %>/',
+          cwd: '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>',
+          dest: '<%%= pistacheo.directories.temporary %>/<%%= pistacheo.directories.public %>/',
           src: [
             '**/*',
             '!**/\_*/**'<% if (htmlOption === 'swig') { %>,
@@ -21,31 +21,24 @@ var taskConfig = function(grunt) {
     build: {
       files: [{
         expand: true,
-        cwd: '<%%= yeogurt.directories.source %>/',
-        dest: '<%%= yeogurt.directories.destination %>/',
+        cwd: '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>',
+        dest: '<%%= pistacheo.directories.destination %>/<%%= pistacheo.directories.public %>/',
         src: [
           '**/*',
-          '!**/\_*/**'<% if (htmlOption === 'swig') { %>,
-          '!**/*.swig'<% } else if (htmlOption === 'jade') { %>,
-          '!**/*.jade'<% } %>
+          '!**/\_*/**',
+          '!**/*.jade'
         ]
-      }<% if (useServer && singlePageApplication) { %>, {
-        expand: true,
-        cwd: '<%%= yeogurt.directories.server %>/templates/',
-        dest: '<%%= yeogurt.directories.temporary %>',
-        src: [
-          'index.html'
-        ]
-      }<% } %><% if (useServer) { %>, {
+      }, {
         expand: true,
         cwd: './',
-        dest: '<%%= yeogurt.directories.destination %>/',
+        dest: '<%%= pistacheo.directories.destination %>/',
         src: [
-          '<%%= yeogurt.directories.server %>/**/*',
-          'server.js',
-          'package.json'
+          '<%%= pistacheo.directories.source %>/**/*',
+          '!<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/**',
+          'package.json',
+          'pistacheo.conf.js'
         ]
-      }<% } %>]
+      }]
     }
   });
 

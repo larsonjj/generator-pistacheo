@@ -29,6 +29,7 @@ var answersConfig = function answersConfig() {
   this.versionControl = this.answers.versionControl;
 
   // Server Info
+  // Server Info
 
   this.dbType = this.answers.dbType || this.answers.dbOption;
 
@@ -90,6 +91,7 @@ var answersConfig = function answersConfig() {
   // Client
   this.jsOption = this.answers.jsOption;
   this.cssOption = this.answers.cssOption;
+  this.htmlOption = this.answers.htmlOption;
   this.sassSyntax = this.answers.sassSyntax;
   this.extras = this.answers.extras;
 

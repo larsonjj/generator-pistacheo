@@ -6,16 +6,13 @@
 var taskConfig = function(grunt) {
 
   // Load config for use with non-grunt logic
-  var yeogurt = grunt.config.get('yeogurt');
+  var pistacheo = grunt.config.get('pistacheo');
 
   grunt.config.set('browserify', {
     serve: {
       options: {
         transform: [
-          require('envify')<% if (jsFramework === 'react') { %>,
-          require('babelify')<% } else if (jsFramework === 'angular') { %>,
-          require('browserify-ngannotate')<% } else if (jsFramework === 'marionette') { %>,
-          require('jstify')<% } %>
+          require('envify')
         ],
         browserifyOptions: {
           debug: true
@@ -23,18 +20,15 @@ var taskConfig = function(grunt) {
         watch: true
       },
       files: {
-        '<%%= yeogurt.directories.temporary %>/<%%= yeogurt.directories.scripts.replace(/^_/, "") %>/main.js': [
-          '<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.scripts %>/main.<% if (jsFramework === 'react') { %>jsx<% } else { %>js<% } %>'
+        '<%%= pistacheo.directories.temporary %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.scripts.replace(/^_/, "") %>/main.js': [
+          '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.scripts %>/main.js'
         ]
       }
     },
     build: {
       options: {
         transform: [
-          require('envify')<% if (jsFramework === 'react') { %>,
-          require('babelify')<% } else if (jsFramework === 'angular') { %>,
-          require('browserify-ngannotate')<% } else if (jsFramework === 'marionette') { %>,
-          require('jstify')<% } %>
+          require('envify')
         ],
         browserifyOptions: {
           debug: true
@@ -43,23 +37,20 @@ var taskConfig = function(grunt) {
           // Minify code
           return b.plugin('minifyify', {
             map: 'main.js.map',
-            output: yeogurt.directories.destination + '/' + yeogurt.directories.scripts.replace(/^_/, '') + '/main.js.map'
+            output: pistacheo.directories.destination + '/' + pistacheo.directories.scripts.replace(/^_/, '') + '/main.js.map'
           });
         }
       },
       files: {
-        '<%%= yeogurt.directories.destination %>/<%%= yeogurt.directories.scripts.replace(/^_/, "") %>/main.js': [
-          '<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.scripts %>/main.<% if (jsFramework === 'react') { %>jsx<% } else { %>js<% } %>'
+        '<%%= pistacheo.directories.destination %>/<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.scripts.replace(/^_/, "") %>/main.js': [
+          '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.scripts %>/main.js'
         ]
       }
     },<% if (useTesting) { %>
     test: {
       options: {
         transform: [
-          require('envify')<% if (jsFramework === 'react') { %>,
-          require('babelify')<% } else if (jsFramework === 'angular') { %>,
-          require('browserify-ngannotate')<% } else if (jsFramework === 'marionette') { %>,
-          require('jstify')<% } %>
+          require('envify')
         ],
         browserifyOptions: {
           debug: true
@@ -67,7 +58,9 @@ var taskConfig = function(grunt) {
         watch: true
       },
       files: {
-        '<%%= yeogurt.directories.temporary %>/<%%= yeogurt.directories.scripts.replace(/^_/, "") %>/bundle.js': ['<%%= yeogurt.directories.source %>/**/*.spec.<% if (jsFramework === 'react') { %>{js,jsx}<% } else { %>js<% } %>']
+        '<%%= pistacheo.directories.temporary %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.scripts.replace(/^_/, "") %>/bundle.js': [
+          '<%%= pistacheo.directories.source %>/**/*.spec.js'
+        ]
       }
     }<% } %>
   });

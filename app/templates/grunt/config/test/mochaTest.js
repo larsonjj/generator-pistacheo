@@ -8,7 +8,7 @@ var taskConfig = function(grunt) {
     options: {
       reporter: 'spec'
     },
-    src: ['<%%= yeogurt.directories.server %>/**/*.spec.js']
+    src: ['<%%= pistacheo.directories.source %>/**/*.spec.js']
   });
 
 };

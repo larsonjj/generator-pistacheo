@@ -6,15 +6,12 @@
 
 var taskConfig = function(grunt) {
   grunt.registerTask('build', 'Build a production ready version of your site.', [
-    'clean:build',<% if (useServer) { %>
-    'env:prod',<% } %>
+    'clean:build',
+    'env:prod',
     'copy:build',
     'concurrent:images',
-    'concurrent:compile',<% if (jsFramework === 'angular') { %>
-    'ngtemplates:compile',<% } %>
-    'postcss:serve',
-    'htmlmin:build',<% if (useKss || useJsdoc || useDashboard) { %>
-    'concurrent:docs',<% } %>
+    'concurrent:compile',
+    'postcss:build',
     'clean:tmp'
   ]);
 };

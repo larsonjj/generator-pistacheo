@@ -11,11 +11,12 @@ var taskConfig = function(grunt) {
         outputStyle: 'nested',
         sourceMap: true,
         includePaths: [
-          '<%%= yeogurt.directories.source %>'
+          '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/'
         ]
       },
       files: {
-        '<%%= yeogurt.directories.temporary %>/<%%= yeogurt.directories.styles.replace(/^_/, "") %>/main.css': '<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.styles %>/main.{scss,sass}'
+        '<%%= pistacheo.directories.temporary %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles.replace(/^_/, "") %>/main.css':
+          '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles %>/main.{scss,sass}'
       }
     },
     build: {
@@ -24,11 +25,12 @@ var taskConfig = function(grunt) {
         outputStyle: 'compressed',
         sourceMap: true,
         includePaths: [
-          '<%%= yeogurt.directories.source %>'
+          '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/'
         ]
       },
       files: {
-        '<%%= yeogurt.directories.destination %>/<%%= yeogurt.directories.styles.replace(/^_/, "") %>/main.css': '<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.styles %>/main.{scss,sass}'
+        '<%%= pistacheo.directories.destination %>/<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles.replace(/^_/, "") %>/main.css':
+          '<%%= pistacheo.directories.source %>/<%%= pistacheo.directories.public %>/<%%= pistacheo.directories.styles %>/main.{scss,sass}'
       }
     }
   });

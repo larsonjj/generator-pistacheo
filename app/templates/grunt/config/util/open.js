@@ -5,8 +5,8 @@
 var taskConfig = function(grunt) {
 
   // Load config for use with non-grunt logic
-  var yeogurt = grunt.config.get('yeogurt');
-  var serverUrl = 'http://' + yeogurt.host + ':' + yeogurt.port + '/' + yeogurt.baseUrl;
+  var pistacheo = grunt.config.get('pistacheo');
+  var serverUrl = 'http://' + pistacheo.host + ':' + pistacheo.port + pistacheo.baseUrl;
 
   grunt.config.set('open', {
     serve: {

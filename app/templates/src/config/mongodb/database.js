@@ -1,8 +1,11 @@
 // Database Configuration
 
 'use strict';
+
+// Configuration file(s)
+var config = require('../../pistacheo.conf');
+
 var mongoose = require('mongoose');
-var settings = require('./env/default');
 
 var databaseConfig = function(app) {
 
@@ -10,7 +13,7 @@ var databaseConfig = function(app) {
   var env = app.get('env');
 
   // Connect to database
-  mongoose.connect(settings.database.url, settings.database.options);
+  mongoose.connect(config.database.url, config.database.options);
 
   if (env === 'development') {
     // Log database actions

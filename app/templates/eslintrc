@@ -10,7 +10,6 @@
   "globals": {
       "DocumentFragment": true,
       "$": true,
-      "Modernizr": true,
       "jQuery": true,
       "it": true,
       "describe": true,

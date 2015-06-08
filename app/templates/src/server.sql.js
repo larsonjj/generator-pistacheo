@@ -1,5 +1,10 @@
 'use strict';
 
+// Configuration file(s)
+var config = require('../pistacheo.conf');
+
+// Libs
+var path = require('path');
 var express = require('express');
 
 // Add coloring for console output
@@ -9,10 +14,25 @@ require('colors');
 var app = express();
 
 // Database configuration
-var db = require('./config/database');
+// Database configuration
+var db = require(
+  path.join(
+    config.directories.root,
+    config.directories.source,
+    config.directories.config,
+    'database'
+  )
+)(app);
 
 // Express configuration
-require('./config/express')(app, express<% if (dbOption && dbOption !== 'none') { %>, db<% } %>);
+require(
+  path.join(
+    config.directories.root,
+    config.directories.source,
+    config.directories.config,
+    'express'
+  )
+)(app, express<% if (dbOption && dbOption !== 'none') { %>, db<% } %>);
 
 // Verify database connection and sync tables
 db.sequelize.authenticate().complete(function(err) {

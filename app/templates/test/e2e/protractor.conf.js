@@ -52,13 +52,5 @@ exports.config = {
   mochaOpts: {
     reporter: 'spec',
     slow: 30000
-  }<% } %><% if (jsFramework !== 'angular') { %>,
-
-  // Setup globals for protractor tests
-  onPrepare: function() {
-      // Lets protractor know if it should be looking for angular in tests
-      global.isAngularSite = function(flag) {
-          browser.ignoreSynchronization = !flag;
-      };
   }<% } %>
 };

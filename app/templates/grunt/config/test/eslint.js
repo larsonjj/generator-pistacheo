@@ -11,9 +11,9 @@ var taskConfig = function(grunt) {
     target: [
       'Gruntfile.js',
       'grunt/**/*.js',
-      '<%%= yeogurt.directories.source %>/**/*.js',
-      '!<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.docs %>/**/*.<% if (jsFramework === 'react') { %>{js,jsx}<% } else { %>js<% } %>',
-      '!<%%= yeogurt.directories.source %>/<%%= yeogurt.directories.vendor %>/**/*.<% if (jsFramework === 'react') { %>{js,jsx}<% } else { %>js<% } %>'
+      '<%%= pistacheo.directories.source %>/**/*.js',
+      // Ignore an folder named 'vendor'
+      '!<%%= pistacheo.directories.source %>/**/<%%= pistacheo.directories.vendor %>/**/*.js'
     ]
   });
 
