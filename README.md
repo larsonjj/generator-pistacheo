@@ -8,7 +8,7 @@ A Yeoman generator that scaffolds out Express API and Server applications.
 
 # Table of Contents
 
-- [What can I create with Pistacheo?](#what-can-i-create-with-yeogurt)
+- [What can I create with Pistacheo?](#what-can-i-create-with-pistacheo)
 - [Getting Started](#getting-started)
 - [Features](#features)
 - [Grunt Workflow](#grunt-workflow)
@@ -19,7 +19,7 @@ A Yeoman generator that scaffolds out Express API and Server applications.
 - [Release History](#release-history)
 - [License](#license)
 
-## What can I create with Yeogurt?
+## What can I create with Pistacheo?
 - Build out [Express](http://expressjs.com/) server applications using [Jade](http://jade-lang.com/) or [Swig](http://paularmstrong.github.io/swig/) templates.
 - Create an [Express](http://expressjs.com/) API server application.
 
@@ -44,10 +44,10 @@ Once you have Node installed, make sure you have these tools by opening up a ter
 
 If you get any errors and/or you're version(s) are too low, you should run `npm install -g yo grunt-cli`. This will install both tools and update them to their latest versions.
 
-#### Yeogurt
+#### Pistacheo
 Now that you have all the needed dependencies, you can install this generator with the following command: `npm install -g generator-pistacheo`
 
-That completes installation! So at this point you should have all the needed tools to start working Yeogurt.
+That completes installation! So at this point you should have all the needed tools to start working Pistacheo.
 
 ### Usage
 When starting a new project, you will want to: open up a terminal/command prompt, make a new directory, and navigate into it.
@@ -56,16 +56,16 @@ When starting a new project, you will want to: open up a terminal/command prompt
 mkdir my-new-project && cd $_
 ```
 
-then, run the Yeogurt generator.
+then, run the Pistacheo generator.
 
 ```
-yo yeogurt
+yo pistacheo
 ```
 
 Optionally, you can skip the automated installation of npm and bower packages by passing in `--skip-install`. The main reason to use this is if you have spotty/no internet connection, but would still like to generate your project.
 
 ```
-yo yeogurt --skip-install
+yo pistacheo --skip-install
 ```
 
 Follow all the prompts and choose what suits you most for the project you would like to create. When you finish with all of the prompts, your project scaffold will be created and all dependencies will be installed.
@@ -82,7 +82,7 @@ You can learn more about what tasks are available in the [grunt tasks](#grunt-wo
 
 > IMPORTANT: SVN users should choose the 'SVN' version control option when running the generator. Then be sure to run the `svn-init.sh` (Linux, OSX) or `svn-init.bat` (Window) script in order to correctly setup ignores for your project. These scripts will be located in the root of your project folder. It is recommended that you do this before committing any code.
 
-Congratulations! You should now have successfully created a Yeogurt project and are ready to start building out your site/app.
+Congratulations! You should now have successfully created a Pistacheo project and are ready to start building out your site/app.
 
 
 ## Features
@@ -125,7 +125,6 @@ Starts up a development server that watches files and automatically reloads them
 
 |Tasks| Description
 |---------|-------
-|grunt serve:docs| same as [`grunt serve`](#grunt-serve), but will also watch and recompile automated documentation (KSS, JSDoc, etc).
 |grunt serve:dist| runs [`grunt build`](#grunt-build) and starts up a server that loads the optimized files
 
 ***NOTE: you can add the `--allow-remote` option to any of these commands to allow remote devices on the same network to view your site/app***
@@ -146,8 +145,8 @@ Runs ESLint and Karma to lint and run JavaScript tests, respectively.
 
 ## Sub-Generators
 
-* [yeogurt:api](#api)
-* [yeogurt:page](#page)
+* [pistacheo:api](#api)
+* [pistacheo:page](#page)
 
 ***Note: Generators need to be run from the root directory of your app.***
 
@@ -158,7 +157,7 @@ Creates React Component File.
 Example:
 
 ```
-yo yeogurt:react mycomponent
+yo pistacheo:react mycomponent
 ? Where would you like to create this react component?: client/scripts/components
 ? Where would you like to create this react component's test?: test/spec/components
 ```
