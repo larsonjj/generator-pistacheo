@@ -1,6 +1,6 @@
-extend <%= rootDir %>/layouts/base
+extends <%= rootDir %>/layouts/base
 
 block layout
   //- Provides layout level markup
-  .layout-wrapper<% if (name) { %>.<%= _.slugify(name.toLowerCase()) %><% } %>
+  .layout-wrapper.<%= _.slugify(name.toLowerCase()) %>
     block content

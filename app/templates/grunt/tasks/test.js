@@ -16,11 +16,11 @@ var taskConfig = function(grunt) {
     }<% } %><% if (useServerTesting) { %>
 
     if (target === 'server') {
-        grunt.task.run([
-          'env:all',
-          'env:test',
-          'mochaTest'
-        ]);
+      grunt.task.run([
+        'env:all',
+        'env:test',
+        'mochaTest'
+      ]);
     }<% } %>
 
     if (!target || target === 'client') {

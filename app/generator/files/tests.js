@@ -17,7 +17,7 @@ var testingFiles = function testingFiles() {
   }
 
   if (this.useServerTesting) {
-    this.template('server/home/__tests__/home.spec.js', 'server/home/__tests__/home.spec.js');
+    this.template('src/pages/home/__tests__/home.spec.js', 'src/pages/home/__tests__/home.spec.js');
   }
 };
 

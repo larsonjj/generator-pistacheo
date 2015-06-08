@@ -3,11 +3,11 @@ var util = require('util');
 var yeoman = require('yeoman-generator');
 var getDirCount = require('../helpers/get-dir-count');
 var path = require('path');
-var yeogurtConf;
+var pistacheoConf;
 
 try {
-  yeogurtConf = require(path.join(process.cwd(), './pistacheo.conf'));
-  var directories = yeogurtConf.directories;
+  pistacheoConf = require(path.join(process.cwd(), './pistacheo.conf'));
+  var directories = pistacheoConf.directories;
 }
 catch(e) {
   return; // Do Nothing
@@ -22,15 +22,11 @@ var PageGenerator = module.exports = function PageGenerator() {
 
   // options
   this.projectName = fileJSON.projectName;
-  this.jsFramework = fileJSON.jsFramework;
-  this.singlePageApplication = fileJSON.singlePageApplication;
   this.jsOption = fileJSON.jsOption;
-  this.jsTemplate = fileJSON.jsTemplate;
-  this.cssOption = fileJSON.cssOption || 'css';
+  this.cssOption = fileJSON.cssOption;
   this.sassSyntax = fileJSON.sassSyntax;
   this.testFramework = fileJSON.testFramework;
   this.useTesting = fileJSON.useTesting;
-  this.useJsx = fileJSON.useJsx;
   this.htmlOption = fileJSON.htmlOption;
   this.useServerTesting = fileJSON.useServerTesting;
 
@@ -47,27 +43,18 @@ PageGenerator.prototype.ask = function ask() {
     name: 'pageFile',
     message: 'Where would you like to create this page?',
     default: function(answers) {
-      return yeogurtConf ? directories.source : directories.source + '/pages';
+      return pistacheoConf ? path.join(directories.source, directories.pages) : 'src/pages';
     }
   }, {
-    when: function(answers) {
-      return answers.type === 'page';
-    },
     name: 'useLayout',
     message: 'What layout would you like to extend from?',
-    default: yeogurtConf ? directories.source + '/' + directories.layouts + '/base' : directories.source + '/layouts/base'
-  }, {
-    name: 'generateFrontend',
-    message: 'Would you like to generate src assets (JS, ' + self.cssOption.toUpperCase() + ') for this module?',
-    type: 'confirm'
+    default: pistacheoConf ? directories.source + '/' + directories.layouts + '/base' : directories.source + '/layouts/base'
   }];
 
   this.prompt(prompts, function(answers) {
 
     this.type = answers.type;
     this.useLayout = answers.useLayout ? answers.useLayout.replace(directories.source + '/', '') : false;
-
-    this.generateFrontend = answers.generateFrontend;
 
     this.templateFile = path.join(
         answers.pageFile,
@@ -81,7 +68,7 @@ PageGenerator.prototype.ask = function ask() {
         'package'
       );
 
-    if (this.moduleLocation === 'server' && this.type === 'layout') {
+    if (this.type === 'layout') {
       this.pageFile = path.join(
         answers.pageFile,
         this._.slugify(this.name.toLowerCase())
@@ -102,13 +89,11 @@ PageGenerator.prototype.ask = function ask() {
       );
     }
 
+    // Get root directory
+    this.rootDir = getDirCount(this.pageFile);
+
     // Get source directory
-    if (this.type === 'layout') {
-      this.rootDir = getDirCount(this.pageFile.replace(directories.source + '/' + directories.layouts + '/', ''));
-    }
-    else {
-      this.rootDir = getDirCount(this.pageFile.replace(directories.source + '/', ''));
-    }
+    this.sourceDir = getDirCount(this.pageFile.replace(directories.source + '/', ''));
 
     this.testFile = path.join(
         answers.pageFile,
@@ -120,7 +105,7 @@ PageGenerator.prototype.ask = function ask() {
     this.moduleURL = answers.moduleURL;
 
     this.htmlURL = path.join(
-        answers.pageFile.replace('src', ''),
+        answers.pageFile.replace(directories.source, ''),
         this._.slugify(this.name.toLowerCase()),
         this._.slugify(this.name.toLowerCase()),
         '.html'
@@ -163,38 +148,10 @@ PageGenerator.prototype.files = function files() {
     }
   }
 
-  if (this.type === 'module' && (this.moduleLocation !== 'server' || this.generateFrontend)) {
-    if (this.jsOption === 'browserify') {
-      this.template('module.js', this.pageFile.replace('server', 'src') + '.js');
-      if (this.useTesting) {
-        this.template('module.spec.js', this.testFile.replace('server', 'src') + '.spec.js');
-      }
-    }
+  this.template('server/module.js', this.pageFile + '.js');
+  this.template('server/module.controller.js', this.pageFile + '.controller.js');
+  if (this.useServerTesting) {
+    this.template('server/module.spec.js', this.testFile + '.spec.js');
   }
 
-  if (this.moduleLocation === 'server') {
-    this.template('server/package.json', this.packageFile + '.json');
-    this.template('server/module.js', this.pageFile + '.js');
-    this.template('server/module.controller.js', this.pageFile + '.controller.js');
-    if (this.useServerTesting) {
-      this.template('server/module.spec.js', this.testFile + '.spec.js');
-    }
-  }
-
-  if (this.type !== 'page' && (this.moduleLocation !== 'server' || this.generateFrontend)) {
-    if (this.cssOption === 'sass') {
-      if (this.sassSyntax === 'sass') {
-        this.template('module.css', this.pageFile.replace('server', 'src') + '.sass');
-      }
-      else {
-        this.template('module.css', this.pageFile.replace('server', 'src') + '.scss');
-      }
-    }
-    else if (this.cssOption === 'less') {
-      this.template('module.css', this.pageFile.replace('server', 'src') + '.less');
-    }
-    else if (this.cssOption === 'stylus') {
-      this.template('module.css', this.pageFile.replace('server', 'src') + '.styl');
-    }
-  }
 };

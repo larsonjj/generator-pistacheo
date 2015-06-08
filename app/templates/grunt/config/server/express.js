@@ -1,6 +1,7 @@
 // Configuration for Express task(s)
 // Boots up Node server with specified environment variables
 // and server script
+/*eslint camelcase:0*/
 'use strict';
 
 var taskConfig = function(grunt) {

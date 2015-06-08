@@ -1,9 +1,16 @@
 'use strict';
 
-var server = require('<%= rootDir %>../server/server');
+// Configuration file(s)
+var config = require('<%= rootDir %>pistacheo.conf');
+
+// Libs
+var path = require('path');
 var request = require('supertest');
 
-describe('GET /api/<%= name.toLowerCase() %>', function() {
+// Get Express bootstrap file
+var server = require(path.join(config.directories.root, config.directories.source, 'server'));
+
+describe('GET /<%= _.camelize(name.toLowerCase()) %>', function() {
 
   it('should respond with HTML', function(done) {
     request(server)

@@ -3,6 +3,15 @@ var util = require('util');
 var yeoman = require('yeoman-generator');
 var getDirCount = require('../helpers/get-dir-count');
 var path = require('path');
+var pistacheoConf;
+
+try {
+  pistacheoConf = require(path.join(process.cwd(), './pistacheo.conf'));
+  var directories = pistacheoConf.directories;
+}
+catch(e) {
+  return; // Do Nothing
+}
 
 var APIGenerator = module.exports = function APIGenerator() {
   // By calling `NamedBase` here, we get the argument to the subgenerator call
@@ -27,8 +36,8 @@ APIGenerator.prototype.ask = function ask() {
 
   if (this.dbOption === 'none' || !this.dbOption) {
     this.log('This subgenerator is only used for Applications using a database.');
-    this.log('It seems as though you are not using a database');
-    this.log('Operation aborted');
+    this.log('It seems as though you are not using a database.');
+    this.log('Operation aborted.');
     this.abort = true;
     return;
   }
@@ -38,7 +47,7 @@ APIGenerator.prototype.ask = function ask() {
   var prompts = [{
     name: 'apiFile',
     message: 'Where would you like to create api files?',
-    default: 'server/app/api'
+    default: path.join(directories.source, 'api')
   }];
 
   this.prompt(prompts, function(answers) {
@@ -49,21 +58,19 @@ APIGenerator.prototype.ask = function ask() {
         this._.slugify(this.name.toLowerCase())
       );
 
-    // Get root directory
-    this.rootDir = getDirCount(this.apiFile);
-
-    this.packageFile = path.join(
-        answers.apiFile,
-        this._.slugify(this.name.toLowerCase()),
-        'package'
-      );
-
     this.testFile = path.join(
         answers.apiFile,
         this._.slugify(this.name.toLowerCase()),
         '__tests__',
         this._.slugify(this.name.toLowerCase())
       );
+
+    // Get root directory
+    this.rootDir = getDirCount(this.apiFile);
+
+    // Get source directory
+    this.sourceDir = getDirCount(this.testFile.replace(directories.source + '/', ''));
+
     done();
   }.bind(this));
 };
@@ -75,7 +82,6 @@ APIGenerator.prototype.files = function files() {
   }
 
   this.template('api.js', this.apiFile + '.js');
-  this.template('package.json', this.packageFile + '.json');
 
   if (this.dbOption === 'mongodb') {
     this.template('mongodb/api.controller.js', this.apiFile + '.controller.js');
@@ -87,7 +93,7 @@ APIGenerator.prototype.files = function files() {
     this.template('sql/api.model.js', this.apiFile + '.model.js');
   }
 
-  if (this.useTesting) {
+  if (this.useServerTesting) {
     this.template('api.spec.js', this.testFile + '.spec.js');
   }
 
