@@ -150,26 +150,49 @@ Runs ESLint and Karma to lint and run JavaScript tests, respectively.
 
 ***Note: Generators need to be run from the root directory of your app.***
 
-### React
+### API
 
-Creates React Component File.
+Creates a new API route.
 
 Example:
 
 ```
-yo pistacheo:react mycomponent
-? Where would you like to create this react component?: client/scripts/components
-? Where would you like to create this react component's test?: test/spec/components
+yo pistacheo:api data
+? Where would you like to create this react component?: src/api
 ```
 
 Produces:
 
 ```
-client/scripts/components/mycomponent.{jsx,js}
-test/spec/components/mycomponent.spec.js
+src/api/index.js
+src/api/data.model.js
+src/api/data.controller.js
+src/api/__tests__/data.spec.js
 ```
 
-***NOTE: `{jsx,js}` means that the file extension will match the template engine you chose: `JSX` or just plain `JS`***
+This will create a new route: `/api/data`.
+
+### Page
+
+Creates a new Page route.
+
+Example:
+
+```
+yo pistacheo:page contact
+? Where would you like to create this react component?: src/pages
+```
+
+Produces:
+
+```
+src/pages/index.js
+src/pages/contact.model.js
+src/pages/contact.controller.js
+src/pages/__tests__/contact.spec.js
+```
+
+This will create a new route: `/contact`.
 
 ## Testing
 To run unit tests, you have a couple options:
