@@ -187,7 +187,7 @@ Produces:
 
 ```
 src/pages/index.js
-src/pages/contact.model.js
+src/pages/contact.jade
 src/pages/contact.controller.js
 src/pages/__tests__/contact.spec.js
 ```

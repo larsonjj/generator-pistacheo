@@ -89,6 +89,12 @@ PageGenerator.prototype.ask = function ask() {
       );
     }
 
+    this.indexFile = path.join(
+        answers.pageFile,
+        this._.slugify(this.name.toLowerCase()),
+        'index'
+      );
+
     // Get root directory
     this.rootDir = getDirCount(this.pageFile);
 
@@ -148,7 +154,7 @@ PageGenerator.prototype.files = function files() {
     }
   }
 
-  this.template('server/module.js', this.pageFile + '.js');
+  this.template('server/module.js', this.indexFile + '.js');
   this.template('server/module.controller.js', this.pageFile + '.controller.js');
   if (this.useServerTesting) {
     this.template('server/module.spec.js', this.testFile + '.spec.js');
