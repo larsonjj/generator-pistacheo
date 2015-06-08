@@ -1,6 +1,6 @@
 {
   "name": "generator-pistacheo",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha",
   "description": "Yeoman generator for creating Express Applications and APIs",
   "keywords": [
     "yeoman-generator",

@@ -158,7 +158,7 @@ Example:
 
 ```
 yo pistacheo:api data
-? Where would you like to create this react component?: src/api
+? Where would you like to create api files? (src/api)
 ```
 
 Produces:
@@ -180,7 +180,8 @@ Example:
 
 ```
 yo pistacheo:page contact
-? Where would you like to create this react component?: src/pages
+? Where would you like to create this page? (src/pages)
+? What layout would you like to extend from? (src/layouts/base
 ```
 
 Produces:
