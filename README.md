@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/larsonjj/generator-pistacheo/master/docs/images/logo.png" />
 </p>
 
-# Pistacheo Generator [![Build Status](https://secure.travis-ci.org/larsonjj/generator-pistacheo.png?branch=master)](https://travis-ci.org/larsonjj/generator-pistacheo) [![NPM version](https://badge.fury.io/js/generator-pistacheo.png)](http://badge.fury.io/js/generator-pistacheo) [![Coverage Status](https://coveralls.io/repos/larsonjj/generator-pistacheo/badge.png)](https://coveralls.io/r/larsonjj/generator-pistacheo)
+# Pistacheo Generator [![Build Status](https://secure.travis-ci.org/larsonjj/generator-pistacheo.png?branch=master)](https://travis-ci.org/larsonjj/generator-pistacheo) [![NPM version](https://badge.fury.io/js/generator-pistacheo.png)](http://badge.fury.io/js/generator-pistacheo) [![Coverage Status](https://coveralls.io/repos/larsonjj/generator-pistacheo/badge.svg?branch=master)](https://coveralls.io/r/larsonjj/generator-pistacheo?branch=master)
 
 A Yeoman generator that scaffolds out Express API and Server applications.
 
