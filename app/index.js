@@ -15,7 +15,6 @@ var order = [
   'server',
   'client',
   'testing',
-  'deployment',
   /* Config */
   'answers', // Handle answers and them up for use in templates
   'save', // Save answers to .yo-rc.json file
@@ -27,6 +26,7 @@ var order = [
   'jade',
   'swig',
   'style',
+  'script',
   'node',
   'tests',
   /* Config */

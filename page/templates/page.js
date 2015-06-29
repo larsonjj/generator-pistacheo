@@ -5,6 +5,6 @@ var controller = require('./<%= _.slugify(name.toLowerCase()) %>.controller');
 
 var router = express.Router();
 
-router.get('/', controller.index);
+router.get('/<%= _.slugify(name.toLowerCase()) %>', controller.index);
 
 module.exports = router;

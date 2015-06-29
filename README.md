@@ -34,7 +34,7 @@ There are a few dependencies that this project relies on:
 #### Node.js
 Check to see if you already have Node installed. Do this by bringing up a terminal/command prompt and type `node -v`. If the response shows a version at or above `v0.12.x`, you are all set and can proceed to installing Yeoman, Grunt, and Bower. If you see an error and/or your version is too low, navigate to the [Node.js](http://nodejs.org/) website and install Node from there.
 
-#### Yeoman, Grunt, & Bower
+#### Yeoman & Grunt
 Once you have Node installed, make sure you have these tools by opening up a terminal/command prompt and entering following commands:
 
 | Command  | Response
@@ -62,7 +62,7 @@ then, run the Pistacheo generator.
 yo pistacheo
 ```
 
-Optionally, you can skip the automated installation of npm and bower packages by passing in `--skip-install`. The main reason to use this is if you have spotty/no internet connection, but would still like to generate your project.
+Optionally, you can skip the automated installation of npm packages by passing in `--skip-install`. The main reason to use this is if you have spotty/no internet connection, but would still like to generate your project.
 
 ```
 yo pistacheo --skip-install
@@ -70,7 +70,7 @@ yo pistacheo --skip-install
 
 Follow all the prompts and choose what suits you most for the project you would like to create. When you finish with all of the prompts, your project scaffold will be created and all dependencies will be installed.
 
-***NOTE: If you used the `--skip-install` option, no dependencies will have been installed. You will need to run `npm install && bower install` in your project's root directory in order to get started running automated tasks***
+***NOTE: If you used the `--skip-install` option, no dependencies will have been installed. You will need to run `npm install` in your project's root directory in order to get started running automated tasks***
 
 Now you can run:
 

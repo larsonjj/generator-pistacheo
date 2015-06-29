@@ -28,11 +28,10 @@ describe('Server api sub-generator', function() {
 
       var filesToTest = [
         // add files and folders you expect to NOT exist here.
-        'server/api/' + api + '/' + api + '.js',
-        'server/api/' + api + '/' + api + '.controller.js',
-        'server/api/' + api + '/' + api + '.model.js',
-        'server/api/' + api + '/package.json',
-        'server/api/' + api + '/__tests__/' + api + '.spec.js'
+        'src/api/' + api + '/' + api + '.js',
+        'src/api/' + api + '/' + api + '.controller.js',
+        'src/api/' + api + '/' + api + '.model.js',
+        'src/api/' + api + '/__tests__/' + api + '.spec.js'
       ];
 
       helpers.mockPrompt(this.app, {
@@ -45,7 +44,7 @@ describe('Server api sub-generator', function() {
       this.app.run([], function() {
         createSubGenerator('api', api, {path: '../../../../'}, {
           // mock prompt data
-          apiFile: 'server/api',
+          apiFile: 'src/api'
         }, function() {
           assert.file(filesToTest);
           done();
@@ -58,11 +57,10 @@ describe('Server api sub-generator', function() {
 
       var filesToNotExist = [
         // add files and folders you expect to NOT exist here.
-        'server/api/' + api + '/' + api + '.js',
-        'server/api/' + api + '/' + api + '.controller.js',
-        'server/api/' + api + '/' + api + '.model.js',
-        'server/api/' + api + '/package.json',
-        'server/api/' + api + '/__tests__/' + api + '.spec.js'
+        'src/api/' + api + '/' + api + '.js',
+        'src/api/' + api + '/' + api + '.controller.js',
+        'src/api/' + api + '/' + api + '.model.js',
+        'src/api/' + api + '/__tests__/' + api + '.spec.js'
       ];
 
       helpers.mockPrompt(this.app, {
@@ -75,7 +73,7 @@ describe('Server api sub-generator', function() {
       this.app.run([], function() {
         createSubGenerator('api', api, {path: '../../../../'}, {
           // mock prompt data
-          apiFile: 'server/api',
+          apiFile: 'src/api'
         }, function() {
           assert.noFile(filesToNotExist);
           done();
@@ -88,24 +86,23 @@ describe('Server api sub-generator', function() {
 
       var filesToTest = [
         // add files and folders you expect to NOT exist here.
-        'server/api/' + api + '/' + api + '.js',
-        'server/api/' + api + '/' + api + '.controller.js',
-        'server/api/' + api + '/' + api + '.model.js',
-        'server/api/' + api + '/package.json',
-        'server/api/' + api + '/__tests__/' + api + '.spec.js'
+        'src/api/' + api + '/' + api + '.js',
+        'src/api/' + api + '/' + api + '.controller.js',
+        'src/api/' + api + '/' + api + '.model.js',
+        'src/api/' + api + '/__tests__/' + api + '.spec.js'
       ];
 
       helpers.mockPrompt(this.app, {
         htmlOption: 'jade',
         singlePageApplication: false,
-        useServer: false,
-        useServerTesting: false,
+        useServer: true,
+        useServerTesting: true,
         dbOption: 'mysql'
       });
       this.app.run([], function() {
         createSubGenerator('api', api, {path: '../../../../'}, {
           // mock prompt data
-          apiFile: 'server/api',
+          apiFile: 'src/api'
         }, function() {
           assert.file(filesToTest);
           done();
