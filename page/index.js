@@ -37,7 +37,6 @@ util.inherits(PageGenerator, yeoman.generators.NamedBase);
 // Prompts
 PageGenerator.prototype.ask = function ask() {
 
-  var self = this;
   var done = this.async();
   var prompts = [{
     name: 'pageFile',
@@ -62,32 +61,11 @@ PageGenerator.prototype.ask = function ask() {
         this._.slugify(this.name.toLowerCase())
       );
 
-    this.packageFile = path.join(
-        answers.pageFile,
-        this._.slugify(this.name.toLowerCase()),
-        'package'
-      );
-
-    if (this.type === 'layout') {
-      this.pageFile = path.join(
-        answers.pageFile,
-        this._.slugify(this.name.toLowerCase())
-      );
-    }
-    else if (this.type === 'page') {
-      this.pageFile = path.join(
-        answers.pageFile,
-        this._.slugify(this.name.toLowerCase()),
-        'index'
-      );
-    }
-    else {
-      this.pageFile = path.join(
-        answers.pageFile,
-        this._.slugify(this.name.toLowerCase()),
-        this._.slugify(this.name.toLowerCase())
-      );
-    }
+    this.pageFile = path.join(
+      answers.pageFile,
+      this._.slugify(this.name.toLowerCase()),
+      this._.slugify(this.name.toLowerCase())
+    );
 
     this.indexFile = path.join(
         answers.pageFile,
@@ -124,40 +102,16 @@ PageGenerator.prototype.ask = function ask() {
 PageGenerator.prototype.files = function files() {
 
   if (this.htmlOption === 'jade') {
-    if (this.type === 'module') {
-      this.template('module.jade', this.pageFile + '.jade');
-    }
-    else if (this.type === 'layout') {
-      this.template('module.layout.jade', this.pageFile + '.jade');
-      if (this.moduleLocation === 'server') {
-        return;
-      }
-    }
-    // Default to page type
-    else {
-      this.template('module.page.jade', this.pageFile + '.jade');
-    }
+    this.template('page.jade', this.pageFile + '.jade');
   }
   else if (this.htmlOption === 'swig') {
-    if (this.type === 'module') {
-      this.template('module.swig', this.pageFile + '.swig');
-    }
-    else if (this.type === 'layout') {
-      this.template('module.layout.swig', this.pageFile + '.swig');
-      if (this.moduleLocation === 'server') {
-        return;
-      }
-    }
-    // Default to page type
-    else {
-      this.template('module.page.swig', this.pageFile + '.swig');
-    }
+    this.template('page.swig', this.pageFile + '.swig');
   }
 
-  this.template('server/module.js', this.indexFile + '.js');
-  this.template('server/module.controller.js', this.pageFile + '.controller.js');
+  this.template('page.js', this.indexFile + '.js');
+  this.template('page.controller.js', this.pageFile + '.controller.js');
   if (this.useServerTesting) {
-    this.template('server/module.spec.js', this.testFile + '.spec.js');
+    this.template('page.spec.js', this.testFile + '.spec.js');
   }
 
 };

@@ -25,15 +25,13 @@ describe('Yeogurt generator using Server', function() {
         'grunt/config/util/open.js',
         'grunt/config/server/express.js',
         'grunt/config/server/env.js',
-        'server/index/index.js',
-        'server/index/index.controller.js',
-        'server/index/package.json',
-        'server/config/express.js',
-        'server/config/env',
-        'server/config/env/default.js',
-        'server/config/env/development.js',
-        'server/config/env/production.js',
-        'server/server.js'
+        'src/pages/home/index.js',
+        'src/pages/home/home.controller.js',
+        'src/config/express.js',
+        'src/config/env',
+        'src/config/env/development.js',
+        'src/config/env/production.js',
+        'src/server.js'
       ];
 
       helpers.mockPrompt(this.app, {
@@ -49,10 +47,10 @@ describe('Yeogurt generator using Server', function() {
   describe('With MongoDB Database', function() {
     it('Creates expected files', function(done) {
       var expected = [
-        'server/config/database.js'
+        'src/config/database.js'
       ];
       var fileContentToTest = [
-        ['server/config/database.js', /mongoose/i]
+        ['src/config/database.js', /mongoose/i]
       ];
 
       helpers.mockPrompt(this.app, {
@@ -70,10 +68,10 @@ describe('Yeogurt generator using Server', function() {
   describe('With MySQL Database', function() {
     it('Creates expected files', function(done) {
       var expected = [
-        'server/config/database.js'
+        'src/config/database.js'
       ];
       var fileContentToTest = [
-        ['server/config/database.js', /sequelize/i],
+        ['src/config/database.js', /sequelize/i]
       ];
 
       helpers.mockPrompt(this.app, {
@@ -91,14 +89,14 @@ describe('Yeogurt generator using Server', function() {
   describe('With Static Jade', function() {
     it('Creates expected files', function(done) {
       var expected = [
-        'server/modules/error/404.jade',
-        'server/modules/error/500.jade',
-        'server/modules/error/index.js',
-        'server/layouts/base.jade',
-        'server/index/index.jade',
+        'src/modules/error/404.jade',
+        'src/modules/error/500.jade',
+        'src/modules/error/index.js',
+        'src/layouts/base.jade',
+        'src/pages/home/home.jade'
       ];
       var expectedContent = [
-        ['server/index/index.js', /router\.get\('\/'/i]
+        ['src/pages/home/index.js', /router\.get\('\/'/i]
       ];
 
       helpers.mockPrompt(this.app, {
@@ -116,15 +114,15 @@ describe('Yeogurt generator using Server', function() {
   describe('With Static Swig', function() {
     it('Creates expected files', function(done) {
       var expected = [
-        'server/modules/error/404.swig',
-        'server/modules/error/500.swig',
-        'server/modules/error/index.js',
-        'server/routes.js',
-        'server/layouts/base.swig',
-        'server/index/index.swig',
+        'src/modules/error/404.swig',
+        'src/modules/error/500.swig',
+        'src/modules/error/index.js',
+        'src/routes.js',
+        'src/layouts/base.swig',
+        'src/pages/home/home.swig'
       ];
       var expectedContent = [
-        ['server/index/index.js', /router\.get\('\/'/i]
+        ['src/pages/home/index.js', /router\.get\('\/'/i]
       ];
 
       helpers.mockPrompt(this.app, {
@@ -139,73 +137,13 @@ describe('Yeogurt generator using Server', function() {
       });
     });
   });
-  describe('With Single Page Application', function() {
-    describe('With Defaults', function() {
-      it('Creates expected files', function(done) {
-        var expected = [
-          'src/index.html'
-        ];
-
-        helpers.mockPrompt(this.app, {
-          singlePageApplication: true,
-          useServer: true
-        });
-        this.app.run([], function() {
-          assert.file(expected);
-          done();
-        });
-      });
-    });
-    describe('Without Server templates', function() {
-      it('Creates expected files', function(done) {
-        var expectedContent = [
-          ['server/index/index.js', /router\.get\('\/'/i]
-        ];
-        var fileContentToTest = [
-          ['src/index.html', /<\%\- body \%\>/i],
-          ['server/index/index.js', /reactRender/i]
-        ];
-
-        helpers.mockPrompt(this.app, {
-          singlePageApplication: true,
-          useServer: true,
-          useServerTemplates: false,
-          jsFramework: 'react'
-        });
-        this.app.run([], function() {
-          assert.noFileContent(fileContentToTest);
-          assert.fileContent(expectedContent);
-          done();
-        });
-      });
-    });
-  });
-  describe('With Paypal\'s Lucsa Security Module', function() {
-    it('Creates expected files', function(done) {
-      var expected = [
-        'server/config/security.js'
-      ];
-      var fileContentToTest = [
-        ['server/config/env/default.js', /security/i]
-      ];
-
-      helpers.mockPrompt(this.app, {
-        useServer: true
-      });
-      this.app.run([], function() {
-        assert.file(expected);
-        assert.fileContent(fileContentToTest);
-        done();
-      });
-    });
-  });
   describe('With Cookie Sessions', function() {
     it('Creates expected files', function(done) {
       var expected = [
-        'server/config/secrets.js'
+        'src/config/secrets.js'
       ];
       var fileContentToTest = [
-        ['server/config/express.js', /app.use\(session\(\{/i],
+        ['src/config/express.js', /app.use\(session\(\{/i]
       ];
 
       helpers.mockPrompt(this.app, {

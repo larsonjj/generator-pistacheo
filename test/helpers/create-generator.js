@@ -7,7 +7,7 @@ var Output  = require('../helpers/mute');
 var createSubGenerator = function(type, args, options, mockPrompts, asserts) {
   var _options = options || {};
   var _path = _options.path || '../../../';
-  var subGenerator = helpers.createGenerator('yeogurt:' + type, [
+  var subGenerator = helpers.createGenerator('pistacheo:' + type, [
     _path + '/' + type
   ], args, options);
 
@@ -24,7 +24,7 @@ var createSubGenerator = function(type, args, options, mockPrompts, asserts) {
 var createAppGenerator = function(args, options) {
   var _options = options || {};
   var _path = _options.path || '../../../app';
-  var app = helpers.createGenerator('yeogurt:app', [
+  var app = helpers.createGenerator('pistacheo:app', [
     _path
   ], args, options);
 

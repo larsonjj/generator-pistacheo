@@ -7,18 +7,18 @@ var config = require('../pistacheo.conf');
 var path = require('path');
 
 // Get path to pages
-var _getPagePath = function _getPagePath(page) {
+var getPagePath = function getPagePath(page) {
   return path.join(
     config.directories.root,
     config.directories.source,
     config.directories.pages,
     page || 'home');
-}
+};
 
 var routes = function(app) {
 
   // Insert routes below
-  app.use('/', require(_getPagePath('home')));
+  app.use('/', require(getPagePath('home')));
 
 };
 

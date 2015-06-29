@@ -62,7 +62,7 @@ var serverPrompts = function serverPrompts() {
     },
     name: 'dbName',
     message: 'What is the ' + 'name'.blue + ' of your database?',
-    default: 'yeogurt_db'
+    default: 'pistacheo_db'
   }, {
     when: function(answers) {
       return answers.dbOption !== 'none';

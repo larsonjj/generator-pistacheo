@@ -50,7 +50,7 @@ var config = {
     pages: 'pages',
     config: 'config',
     modules: 'modules',
-    layouts: 'layouts',
+    layouts: 'layouts'
   },
 
   // Lusca security configuration
