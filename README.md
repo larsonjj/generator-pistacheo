@@ -1,3 +1,6 @@
+> IMPORTANT: This project is no longer being maintained.
+
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/larsonjj/generator-pistacheo/master/docs/images/logo.png" />
 </p>
